@@ -42,6 +42,12 @@ INSTALLED_APPS = [
     'frontend',
 ]
 
+BACKEND_APPS = [
+    'backend.customers',
+]
+
+INSTALLED_APPS += BACKEND_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
