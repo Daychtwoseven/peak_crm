@@ -17,13 +17,13 @@ def index_page(request):
 
 
 @require_http_methods(['GET'])
-def clients_list_page(request):
+def clients_lists_page(request):
     try:
         if request.method == "GET":
             context['title'] = 'PEAK CRM | Clients'
             context['module_name'] = 'Clients'
-            context['action'] = 'list'
-            context['breadcrumbs'] = ['Home', 'List']
-            return render(request, 'backend/clients/list.html', context)
+            context['action'] = 'lists'
+            context['breadcrumbs'] = ['Home', 'Lists']
+            return render(request, 'backend/clients/lists.html', context)
     except Exception as e:
         print(e)
