@@ -143,7 +143,6 @@
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body pt-0">
-               <!--begin::Table-->
                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                   <!--begin::Table head-->
                   <thead>
@@ -154,12 +153,55 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
                            </div>
                         </th>
+                        <th class="min-w-125px">Actions</th>
                         <th class="min-w-125px">Name</th>
                         <th class="min-w-125px">Email</th>
                         <th class="min-w-125px">Phone</th>
                         <th class="min-w-125px">Address</th>
-                        <th class="min-w-125px">Created Date</th>
-                        <th class="text-end min-w-70px">Actions</th>
+                        <th class="min-w-125px">State</th>
+                        <th class="min-w-125px">Previous Company</th>
+                        <th class="min-w-125px">Sold With</th>
+                        <th class="min-w-125px">DOB</th>
+                        <th class="min-w-125px">SS</th>
+                        <th class="min-w-125px">Finance Company</th>
+                        <th class="min-w-125px"># of Panels</th>
+                        <th class="min-w-125px">Contract Signed Date</th>
+                        <th class="min-w-125px">Design Requested</th>
+                        <th class="min-w-125px">PE Stamp Requested</th>
+                        <th class="min-w-125px">Permit Submitted?</th>
+                        <th class="min-w-125px">Permit Approved?</th>
+                        <th class="min-w-125px">Interconnection Submitted?</th>
+                        <th class="min-w-125px">Interconnection Approved?</th>
+                        <th class="min-w-125px">Install Date</th>
+                        <th class="min-w-125px">Install Confirmed</th>
+                        <th class="min-w-125px">Install Complete</th>
+                        <th class="min-w-125px">Equipment Ordered</th>
+                        <th class="min-w-125px">Contract Value</th>
+                        <th class="min-w-125px">AHJ</th>
+                        <th class="min-w-125px">AHJ Phone Date</th>
+                        <th class="min-w-125px">Permit Plan #</th>
+                        <th class="min-w-125px">Permit Notes</th>
+                        <th class="min-w-125px">Utility and ESID</th>
+                        <th class="min-w-125px">Approved Permit</th>
+                        <th class="min-w-125px">Contract</th>
+                        <th class="min-w-125px">Stamped Plans</th>
+                        <th class="min-w-125px">UB</th>
+                        <th class="min-w-125px">HOI</th>
+                        <th class="min-w-125px">Front of House</th>
+                        <th class="min-w-125px">Panel Layout</th>
+                        <th class="min-w-125px">Post Install Letter</th>
+                        <th class="min-w-125px">Battery</th>
+                        <th class="min-w-125px">KW</th>
+                        <th class="min-w-125px">Project Cost</th>
+                        <th class="min-w-125px">Their Company Cost</th>
+                        <th class="min-w-125px">Their Company Mo</th>
+                        <th class="min-w-125px">Commission %</th>
+                        <th class="min-w-125px">Calc/Red</th>
+                        <th class="min-w-125px">Bank Funded</th>
+                        <th class="min-w-125px">Adders</th>
+                        <th class="min-w-125px">Paid to Manager</th>
+                        <th class="min-w-125px">Paid to Closer</th>
+                        <th class="text-end min-w-70px">Paid to Setter</th>
                      </tr>
                      <!--end::Table row-->
                   </thead>
@@ -173,30 +215,8 @@
                               <input class="form-check-input" type="checkbox" value="1" />
                            </div>
                         </td>
-                        <!--end::Checkbox-->
-                        <!--begin::Name=-->
-                        <td>
-                           <a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-                        </td>
-                        <!--end::Name=-->
-                        <!--begin::Email=-->
-                        <td>
-                           <a href="#" class="text-gray-600 text-hover-primary mb-1">smith@kpmg.com</a>
-                        </td>
-                        <!--end::Email=-->
-                        <!--begin::Company=-->
-                        <td>-</td>
-                        <!--end::Company=-->
-                        <!--begin::Payment method=-->
-                        <td data-filter="mastercard">
-                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
-                        </td>
-                        <!--end::Payment method=-->
-                        <!--begin::Date=-->
-                        <td>14 Dec 2020, 8:43 pm</td>
-                        <!--end::Date=-->
                         <!--begin::Action=-->
-                        <td class="text-end">
+                        <td>
                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                               Actions
                               <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -222,12 +242,211 @@
                            </div>
                            <!--end::Menu-->
                         </td>
+                        <!--end::Checkbox-->
+                        <!--begin::Name=-->
+                        <td>
+                           <a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
+                        </td>
+                        <!--end::Name=-->
+                        <!--begin::Email=-->
+                        <td>
+                           <a href="#" class="text-gray-600 text-hover-primary mb-1">smith@kpmg.com</a>
+                        </td>
+                        <!--end::Email=-->
+                        <!--begin::Company=-->
+                        <td>-</td>
+                        <!--end::Company=-->
+                        <!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=-->
+                        <!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=-->
+                        <!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=-->
+                        <!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=-->
+                        <!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=-->
+                        <!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <td data-filter="mastercard">
+                           <img src="{% static 'assets/media/svg/card-logos/mastercard.svg' %}" class="w-35px me-3" alt="" />**** 4414
+                        </td>
+                        <!--end::Payment method=--><!--begin::Payment method=-->
+                        <!--begin::Date=-->
+                        <td class="text-end">14 Dec 2020, 8:43 pm</td>
+                        <!--end::Date=-->
                         <!--end::Action=-->
                      </tr>
                   </tbody>
                   <!--end::Table body-->
                </table>
-               <!--end::Table-->
+                  <!--end::Table-->
             </div>
             <!--end::Card body-->
          </div>
