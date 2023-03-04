@@ -17,7 +17,7 @@ class Customers(models.Model):
     address = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     previous_company = models.CharField(max_length=255, null=True)
-    sold_with = models.CharField(max_length=255, null=True)
+    sold_with = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True)
     dob = models.CharField(max_length=255, null=True)
     ss = models.CharField(max_length=255, null=True)
     finance_company = models.CharField(max_length=255, null=True)
@@ -55,6 +55,8 @@ class Customers(models.Model):
     manager = models.ForeignKey(User, models.RESTRICT, null=True, related_name="user_manager")
     setter = models.ForeignKey(User, models.RESTRICT, null=True, related_name="user_setter")
     closer = models.ForeignKey(User, models.RESTRICT, null=True, related_name="user_closer")
+    contractor = models.ForeignKey(User, models.RESTRICT, null=True, related_name="contractor")
+    permit_specialist = models.ForeignKey(User, models.RESTRICT, null=True, related_name="permit_specialist")
     created_by = models.ForeignKey(User, models.RESTRICT)
     date_created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
@@ -96,3 +98,14 @@ class CustomersPeople(models.Model):
 
     def get_fullname(self):
         return f'{self.user.first_name} {self.user.last_name}'
+
+
+class CustomerSelectOptions(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+    field_name = models.CharField(max_length=255)
+    date_created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, models.RESTRICT)
+
+
+

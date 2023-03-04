@@ -93,6 +93,9 @@ var KTCustomersList = (function () {
                         { orderable: !1, targets: 0 },
                         { orderable: !1, targets: 6 },
                     ],
+                    fixedColumns: {
+                        left: 2,
+                    }
                 })).on("draw", function () {
                     r(), c(), l();
                 }),

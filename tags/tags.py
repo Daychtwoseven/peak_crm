@@ -1,6 +1,7 @@
 from django import template
 from django.contrib.auth.models import User
 from django.db.models import Q
+from backend.customers.models import *
 
 register = template.Library()
 
@@ -24,7 +25,21 @@ def managers(request):
 def closers(request):
     return User.objects.filter(Q(groups__name='closer') | Q(groups__name='setter'), is_active=True).all()
 
+@register.simple_tag
+def contractors(request):
+    return User.objects.filter(groups__name='contractor', is_active=True).all()
+
+
+@register.simple_tag
+def permit_specialists(request):
+    return User.objects.filter(groups__name='permit_specialist', is_active=True).all()
+
 
 @register.simple_tag
 def colors():
     return ['success', 'danger', 'warning', 'primary', 'info']
+
+
+@register.simple_tag
+def sold_with_options():
+    return CustomerSelectOptions.objects.filter(field_name='sold_with').all()

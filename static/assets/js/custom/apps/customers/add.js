@@ -49,20 +49,33 @@ KTUtil.onDOMContentLoaded(function () {
 
 $(document).ready(function(){
     var table = $("#kt_customers_table").DataTable();
-    $("#kt_customers_table tbody input[name=previous_company]").on("keyup change", function (ev) {
+    $("#kt_customers_table tbody input[name=td_previous_company]").on("keyup change", function (ev) {
         if (ev.keyCode == 13) {
             const current_row = $(this).closest("tr");
-            const input_value = current_row.find("input[name=previous_company]").val();
+            const input_value = current_row.find("input[name=td_previous_company]").val();
             const customer_id = current_row.find("input[name=id_customer]").val();
-            saveUpdate(customer_id, 'previous_company', input_value)
+            saveUpdate(customer_id, 'previous_company', input_value, 'input')
         }
     });
 
-    const saveUpdate = (customer_id, field, input_value) => {
+    $("#kt_customers_table tbody select[name=td_sold_with]").change(function (ev) {
+        const current_row = $(this).closest("tr");
+        const input_value = current_row.find("select[name=td_sold_with]").val();
+        const customer_id = current_row.find("input[name=id_customer]").val();
+
+        input_value == "Add" ? addOption('sold_with') : saveUpdate(customer_id, 'sold_with', input_value, 'selection')
+    });
+
+    const addOption = (field_option_name) => {
+        $('input[name=field_option_name]').val(field_option_name)
+        $('#addOptionModal').modal('toggle');
+    }
+
+    const saveUpdate = (customer_id, field, input_value, field_type) => {
         $.ajax({
              type: 'POST',
              url: '/customers/update/',
-             data: {'id': customer_id, 'field': field, 'value': input_value, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()},
+             data: {'id': customer_id, 'field': field, 'value': input_value, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(), 'field_type': field_type},
              success: (result) => {
                  const statusMsg = result['statusMsg'];
                  toastr.options = {
@@ -146,6 +159,76 @@ $(document).ready(function(){
        templateResult: optionFormat
     });
 
+    $("#addOptionModal").on("hidden.bs.modal", function () {
+        location.reload(true)
+    });
+
+    $('#addOptionForm').on('submit', (e) => {
+        e.preventDefault();
+        Swal.fire({
+            text: "Are you sure you would like to add?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Yes, add it!",
+            cancelButtonText: "No, return",
+            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+        }).then((result) => {
+            if(result){
+                const formData = $('#addOptionForm').serialize();
+                $.ajax({
+                    type: 'POST',
+                    data: formData,
+                    url: '/customers/add-option/',
+                    success: (result) => {
+                        const statusMsg = result['statusMsg'];
+                         toastr.options = {
+                             closeButton: false,
+                             debug: false,
+                             newestOnTop: false,
+                             progressBar: false,
+                             positionClass: "toastr-top-right",
+                             preventDuplicates: false,
+                             onclick: null,
+                             showDuration: "300",
+                             hideDuration: "1000",
+                             timeOut: "5000",
+                             extendedTimeOut: "1000",
+                             showEasing: "swing",
+                             hideEasing: "linear",
+                             showMethod: "fadeIn",
+                             hideMethod: "fadeOut",
+                         };
+                         toastr.success(statusMsg);
+                    },
+                    error: (result) => {
+                     const statusMsg = result['responseJSON']['statusMsg'];
+                     toastr.options = {
+                         closeButton: false,
+                         debug: false,
+                         newestOnTop: false,
+                         progressBar: false,
+                         positionClass: "toastr-top-right",
+                         preventDuplicates: false,
+                         onclick: null,
+                         showDuration: "300",
+                         hideDuration: "1000",
+                         timeOut: "5000",
+                         extendedTimeOut: "1000",
+                         showEasing: "swing",
+                         hideEasing: "linear",
+                         showMethod: "fadeIn",
+                         hideMethod: "fadeOut",
+                     };
+                     toastr.error(statusMsg);
+                 }
+
+                });
+            }
+        })
+    });
+
+
     $('#addCustomerForm').on('submit', (e) => {
         e.preventDefault();
         Swal.fire({
@@ -176,6 +259,8 @@ $(document).ready(function(){
                  formData.append("manager", $(e.target).find("select[name=manager]").val())
                  formData.append("setter", $(e.target).find("select[name=setter]").val())
                  formData.append("closer", $(e.target).find("select[name=closer]").val())
+                 formData.append("contractor", $(e.target).find("select[name=contractor]").val())
+                 formData.append("permit_specialist", $(e.target).find("select[name=permit_specialist]").val())
                  formData.append("csrfmiddlewaretoken", $(e.target).find("input[name=csrfmiddlewaretoken]").val())
 
                  let front_of_house = $(e.target).find("input[name=front_of_house]").map(function() {
@@ -211,6 +296,8 @@ $(document).ready(function(){
                              $(e.target).find("select[name=manager]").val('').trigger('change')
                              $(e.target).find("select[name=setter]").val('').trigger('change')
                              $(e.target).find("select[name=closer]").val('').trigger('change')
+                             $(e.target).find("select[name=contractor]").val('').trigger('change')
+                             $(e.target).find("select[name=permit_specialist]").val('').trigger('change')
                              $(e.target).find("select[name=people]").val('').trigger('change')
                              $('#addCustomerForm').trigger('reset');
                          });

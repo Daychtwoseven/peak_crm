@@ -60,6 +60,8 @@ def customer_add_page(request):
             manager = request.POST.get('manager')
             setter = request.POST.get('setter')
             closer = request.POST.get('closer')
+            contractor = request.POST.get('contractor')
+            permit_specialist = request.POST.get('permit_specialist')
             customer = Customers.objects.create(name=name, email=email, phone=phone, address=address, state=state,
                                                 previous_company=previous_company, sold_with=sold_with, dob=dob, ss=ss,
                                                 finance_company=finance_company, number_of_panels=number_of_panels,
@@ -80,6 +82,14 @@ def customer_add_page(request):
 
             if closer:
                 customer.closer_id = closer
+                customer.save()
+
+            if contractor:
+                customer.contractor_id = contractor
+                customer.save()
+
+            if permit_specialist:
+                customer.permit_specialist_id = permit_specialist
                 customer.save()
 
             people = request.POST.getlist('people')
@@ -113,7 +123,6 @@ def customer_add_page(request):
                                                                            field='panel_layout',
                                                                            uploaded_by=request.user)
 
-
             return JsonResponse({'statusMsg': 'Success'}, status=200)
     except Exception as e:
         print(e)
@@ -127,11 +136,36 @@ def customer_update_page(request):
         customer = Customers.objects.get(id=request.POST.get('id'))
         field = request.POST.get('field')
         value = request.POST.get('value')
+        field_type = request.POST.get('field_type')
 
-        if field == "previous_company":
-            customer.previous_company = value
-            customer.save()
+        if field_type == "selection":
+            print('here')
+            if field == "sold_with":
+                customer.sold_with_id = value
+                customer.save()
+        elif field_type == "input":
+            if field == "previous_company":
+                customer.previous_company = value
+                customer.save()
 
         return JsonResponse({'statusMsg': ' '.join(field.split('_')).title()}, status=200)
+    except Exception as e:
+        print(e)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['POST'])
+def customer_add_option_page(request):
+    try:
+        field_name = request.POST.get('field_option_name')
+        option_name = request.POST.get('option_name')
+
+        if option_name:
+            if not CustomerSelectOptions.objects.filter(field_name=field_name, name__icontains=option_name).first():
+                CustomerSelectOptions.objects.create(field_name=field_name, name=option_name, created_by=request.user)
+                return JsonResponse({'statusMsg': f'{option_name} Option Added'}, status=200)
+            else:
+                return JsonResponse({'statusMsg': 'Option Name Already Exist'}, status=404)
+        return JsonResponse({'statusMsg': 'Empty option'}, status=404)
     except Exception as e:
         print(e)
