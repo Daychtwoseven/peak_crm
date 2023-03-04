@@ -139,7 +139,6 @@ def customer_update_page(request):
         field_type = request.POST.get('field_type')
 
         if field_type == "selection":
-            print('here')
             if field == "sold_with":
                 customer.sold_with_id = value
                 customer.save()

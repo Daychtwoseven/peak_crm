@@ -95,7 +95,7 @@ $(document).ready(function(){
                      showMethod: "fadeIn",
                      hideMethod: "fadeOut",
                  };
-                 toastr.success(statusMsg);
+                 toastr.success(`${statusMsg} Updated`);
              },
              error: (result) => {
                  const statusMsg = result['responseJSON']['statusMsg'];
@@ -116,7 +116,7 @@ $(document).ready(function(){
                      showMethod: "fadeIn",
                      hideMethod: "fadeOut",
                  };
-                 toastr.error(statusMsg);
+                 toastr.success(`${statusMsg} Updated`);
              }
         });
     }
@@ -199,7 +199,7 @@ $(document).ready(function(){
                              showMethod: "fadeIn",
                              hideMethod: "fadeOut",
                          };
-                         toastr.success(statusMsg);
+                         toastr.success(`${statusMsg} Updated`);
                     },
                     error: (result) => {
                      const statusMsg = result['responseJSON']['statusMsg'];
@@ -220,7 +220,7 @@ $(document).ready(function(){
                          showMethod: "fadeIn",
                          hideMethod: "fadeOut",
                      };
-                     toastr.error(statusMsg);
+                     toastr.success(`${statusMsg} Updated`);
                  }
 
                 });
