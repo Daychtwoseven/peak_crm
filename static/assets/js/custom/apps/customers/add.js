@@ -48,6 +48,57 @@ KTUtil.onDOMContentLoaded(function () {
 
 
 $(document).ready(function(){
+    var table = $("#kt_customers_table").DataTable();
+    $("#kt_customers_table tbody input[name=previous_company]").on("keyup change", function (ev) {
+        if (ev.keyCode == 13) {
+            const current_row = $(this).closest("tr");
+            const input_value = current_row.find("input[name=previous_company]").val();
+            const customer_id = current_row.find("input[name=id_customer]").val();
+            saveUpdate(customer_id, 'previous_company', input_value)
+        }
+    });
+
+    const saveUpdate = (customer_id, field, input_value) => {
+        $.ajax({
+             type: 'POST',
+             url: '/customers/update/',
+             data: {'id': customer_id, 'field': field, 'value': input_value, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()},
+             success: (result) => {
+                 const statusMsg = result['statusMsg'];
+                 toastr.options = {
+                     closeButton: false,
+                     debug: false,
+                     newestOnTop: false,
+                     progressBar: false,
+                     positionClass: "toastr-top-right",
+                     preventDuplicates: false,
+                     onclick: null,
+                     showDuration: "300",
+                     hideDuration: "1000",
+                     timeOut: "5000",
+                     extendedTimeOut: "1000",
+                     showEasing: "swing",
+                     hideEasing: "linear",
+                     showMethod: "fadeIn",
+                     hideMethod: "fadeOut",
+                 };
+                 toastr.success(statusMsg);
+             },
+             error: (result) => {
+                 const statusMsg = result['responseJSON']['statusMsg'];
+                 Swal.fire({
+                     text: statusMsg,
+                     icon: "error",
+                     buttonsStyling: false,
+                     confirmButtonText: "Ok, got it!",
+                     customClass: {
+                         confirmButton: "btn btn-primary"
+                     }
+                 })
+             }
+        });
+    }
+
     // Format options
     var optionFormat = function(item) {
        if ( !item.id ) {

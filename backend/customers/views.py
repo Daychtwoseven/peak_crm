@@ -118,3 +118,20 @@ def customer_add_page(request):
     except Exception as e:
         print(e)
         return JsonResponse({'statusMsg': str(e)}, status=404)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['POST'])
+def customer_update_page(request):
+    try:
+        customer = Customers.objects.get(id=request.POST.get('id'))
+        field = request.POST.get('field')
+        value = request.POST.get('value')
+
+        if field == "previous_company":
+            customer.previous_company = value
+            customer.save()
+
+        return JsonResponse({'statusMsg': ' '.join(field.split('_')).title()}, status=200)
+    except Exception as e:
+        print(e)
