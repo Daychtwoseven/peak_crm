@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 04/03/2023 01:55:24
+ Date: 04/03/2023 10:28:34
 */
 
 SET NAMES utf8mb4;
@@ -23,10 +23,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_group
@@ -51,7 +51,7 @@ CREATE TABLE `auth_group_permissions`  (
   INDEX `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_group_permissions
@@ -63,13 +63,13 @@ CREATE TABLE `auth_group_permissions`  (
 DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE `auth_permission`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int NOT NULL,
-  `codename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `codename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `auth_permission_content_type_id_codename_01ab375a_uniq`(`content_type_id`, `codename`) USING BTREE,
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -129,19 +129,19 @@ INSERT INTO `auth_permission` VALUES (48, 'Can view customers people', 11, 'view
 DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_login` datetime(6) NULL DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user
@@ -166,7 +166,7 @@ CREATE TABLE `auth_user_groups`  (
   INDEX `auth_user_groups_group_id_97559544_fk_auth_group_id`(`group_id`) USING BTREE,
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_groups
@@ -191,7 +191,7 @@ CREATE TABLE `auth_user_user_permissions`  (
   INDEX `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_user_permissions
@@ -215,10 +215,10 @@ CREATE TABLE `customers_customers`  (
   `design_requested` tinyint(1) NOT NULL,
   `dob` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `equipment_ordered` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `equipment_ordered` tinyint(1) NOT NULL,
   `finance_company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `install_complete` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `install_confirmed` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `install_complete` tinyint(1) NOT NULL,
+  `install_confirmed` tinyint(1) NOT NULL,
   `install_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `interconnection_approved` tinyint(1) NOT NULL,
   `interconnection_submitted` tinyint(1) NOT NULL,
@@ -249,6 +249,7 @@ CREATE TABLE `customers_customers`  (
   `closer_id` int NULL DEFAULT NULL,
   `manager_id` int NULL DEFAULT NULL,
   `setter_id` int NULL DEFAULT NULL,
+  `design_fee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customers_customers_created_by_id_bcaace5c_fk_auth_user_id`(`created_by_id`) USING BTREE,
   INDEX `customers_customers_closer_id_dfcbc787_fk_auth_user_id`(`closer_id`) USING BTREE,
@@ -263,16 +264,16 @@ CREATE TABLE `customers_customers`  (
 -- ----------------------------
 -- Records of customers_customers
 -- ----------------------------
-INSERT INTO `customers_customers` VALUES ('17c402866e714104852c9b4f8b95fe32', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 'asdasd', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:28:05.009459', 1, NULL, NULL, NULL);
-INSERT INTO `customers_customers` VALUES ('2dcca8852aee4607ab42ca00261d4007', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:31:58.287914', 1, NULL, 2, NULL);
-INSERT INTO `customers_customers` VALUES ('6f4bdc3117484d94886c1003162b0186', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:32:49.209484', 1, 3, 2, 5);
-INSERT INTO `customers_customers` VALUES ('80f5f64e609f4213a0771d6d8cbf9b8c', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:33:58.615542', 1, 5, 2, 3);
-INSERT INTO `customers_customers` VALUES ('890eacbabfac4b43b79841b8868e2d4b', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:27:51.569399', 1, 5, 2, 3);
-INSERT INTO `customers_customers` VALUES ('a6acd84e2e5a4b90b8aded75c6e4fa2a', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'citations1@allstarpaintingcompany.ca', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:30:31.121622', 1, 3, 2, 5);
-INSERT INTO `customers_customers` VALUES ('a986f82e5a564a559a999c66f6f7d34b', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:29:54.825511', 1, 5, 2, 3);
-INSERT INTO `customers_customers` VALUES ('bfe927c06ef1418ca78b2134ac632362', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 1, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:26:29.678514', 1, 5, 2, 3);
-INSERT INTO `customers_customers` VALUES ('cb4269dc579d4c95b2bbd9eb6ad17b1a', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'citations2@allstarpaintingcompany.ca', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:28:54.516497', 1, 3, 2, 5);
-INSERT INTO `customers_customers` VALUES ('e935fee631b54b7fa067cd914d81f92c', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:31:27.022914', 1, 5, 2, 5);
+INSERT INTO `customers_customers` VALUES ('17c402866e714104852c9b4f8b95fe32', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 'asdasd', 'dang heey', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:28:05.009459', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `customers_customers` VALUES ('2dcca8852aee4607ab42ca00261d4007', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', 'asdasd', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:31:58.287914', 1, NULL, 2, NULL, NULL);
+INSERT INTO `customers_customers` VALUES ('6f4bdc3117484d94886c1003162b0186', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', 'zxczxc', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:32:49.209484', 1, 3, 2, 5, NULL);
+INSERT INTO `customers_customers` VALUES ('80f5f64e609f4213a0771d6d8cbf9b8c', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', 'at first saw you', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:33:58.615542', 1, 5, 2, 3, NULL);
+INSERT INTO `customers_customers` VALUES ('890eacbabfac4b43b79841b8868e2d4b', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', 'zxczxczxc', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:27:51.569399', 1, 5, 2, 3, NULL);
+INSERT INTO `customers_customers` VALUES ('a6acd84e2e5a4b90b8aded75c6e4fa2a', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'citations1@allstarpaintingcompany.ca', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', 'zxczxcqweasdzxcasdqweasdasdasdasdzxcasdqweasdqweqweasdzxcasdqweasdasd', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:30:31.121622', 1, 3, 2, 5, NULL);
+INSERT INTO `customers_customers` VALUES ('a986f82e5a564a559a999c66f6f7d34b', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:29:54.825511', 1, 5, 2, 3, NULL);
+INSERT INTO `customers_customers` VALUES ('bfe927c06ef1418ca78b2134ac632362', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 1, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:26:29.678514', 1, 5, 2, 3, NULL);
+INSERT INTO `customers_customers` VALUES ('cb4269dc579d4c95b2bbd9eb6ad17b1a', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'citations2@allstarpaintingcompany.ca', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:28:54.516497', 1, 3, 2, 5, NULL);
+INSERT INTO `customers_customers` VALUES ('e935fee631b54b7fa067cd914d81f92c', NULL, '684 Osborne St', NULL, NULL, '', NULL, NULL, NULL, NULL, 0, NULL, 'chardrichescol@gmail.com', 0, '', 0, 0, NULL, 0, 0, '', 'John Watsons', '', NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '14314413555', '', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-03 15:31:27.022914', 1, 5, 2, 5, NULL);
 
 -- ----------------------------
 -- Table structure for customers_customersattachments
@@ -351,10 +352,10 @@ DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `object_repr` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `object_id` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `object_repr` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `action_flag` smallint UNSIGNED NOT NULL,
-  `change_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `change_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int NULL DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -362,7 +363,7 @@ CREATE TABLE `django_admin_log`  (
   INDEX `django_admin_log_user_id_c564eba6_fk_auth_user_id`(`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -394,11 +395,11 @@ INSERT INTO `django_admin_log` VALUES (20, '2023-03-03 13:46:24.364896', '6', 'p
 DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE `django_content_type`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `app_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label`, `model`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -421,11 +422,11 @@ INSERT INTO `django_content_type` VALUES (6, 'sessions', 'session');
 DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE `django_migrations`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `app` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -461,18 +462,20 @@ INSERT INTO `django_migrations` VALUES (28, 'customers', '0008_customerspeople',
 INSERT INTO `django_migrations` VALUES (29, 'customers', '0009_customers_closer_customers_manager_customers_setter', '2023-03-03 15:02:50.027677');
 INSERT INTO `django_migrations` VALUES (30, 'customers', '0010_alter_customers_closer_alter_customers_manager_and_more', '2023-03-03 15:25:17.610021');
 INSERT INTO `django_migrations` VALUES (31, 'customers', '0011_alter_customers_design_requested_and_more', '2023-03-03 22:46:09.187873');
+INSERT INTO `django_migrations` VALUES (32, 'customers', '0012_customers_design_fee', '2023-03-04 08:01:12.235489');
+INSERT INTO `django_migrations` VALUES (33, 'customers', '0013_alter_customers_equipment_ordered_and_more', '2023-03-04 08:07:24.135984');
 
 -- ----------------------------
 -- Table structure for django_session
 -- ----------------------------
 DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE `django_session`  (
-  `session_key` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `session_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `session_key` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`) USING BTREE,
   INDEX `django_session_expire_date_a5c62663`(`expire_date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_session
