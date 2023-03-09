@@ -4,4 +4,4 @@ __pycache__
 *.pyc
 venv
 CACHE
-main\settings.py
+main/settings.py
