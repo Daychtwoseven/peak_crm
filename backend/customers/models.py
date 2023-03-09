@@ -3,13 +3,6 @@ from django.contrib.auth.models import AbstractUser, User
 import uuid
 
 class Customers(models.Model):
-    BATTERY_CHOICES = [
-        ('no_bat', 'No Battery'),
-        ('3_kw', '3KW'),
-        ('6_kw', '6KW'),
-        ('10_kw', '10KW')
-    ]
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
@@ -17,35 +10,35 @@ class Customers(models.Model):
     address = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     previous_company = models.CharField(max_length=255, null=True)
-    sold_with = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True)
+    sold_with = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='sold_with_options')
     dob = models.CharField(max_length=255, null=True)
     ss = models.CharField(max_length=255, null=True)
     finance_company = models.CharField(max_length=255, null=True)
     number_of_panels = models.CharField(max_length=255, null=True)
     contract_signed_date = models.DateField(auto_now=False, null=True, blank=True)
-    design_requested = models.BooleanField(default=False)
-    pe_stamp_requested = models.BooleanField(default=False)
-    permit_submitted = models.BooleanField(default=False)
-    interconnection_submitted = models.BooleanField(default=False)
-    permit_approved = models.BooleanField(default=False)
-    interconnection_approved = models.BooleanField(default=False)
+    design_requested = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='design_requested_options')
+    pe_stamp_requested = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='pe_stamp_requested_options')
+    permit_submitted = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='permit_submitted_options')
+    ic_submitted = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='ic_submitted_options')
+    permit_approved = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='permit_approved_options')
+    ic_approved = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='ic_approved_options')
     install_date = models.CharField(max_length=255, null=True)
-    install_confirmed = models.BooleanField(default=False)
-    equipment_ordered = models.BooleanField(default=False)
-    install_complete = models.BooleanField(default=False)
+    install_confirmed = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='install_confirmed_options')
+    equipment_ordered = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='equipment_ordered_options')
+    install_complete = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='install_complete_options')
     contract_value = models.CharField(max_length=255, null=True)
     ahj = models.CharField(max_length=255, null=True)
     ahj_phone = models.CharField(max_length=255, null=True)
     permit_plan_number = models.CharField(max_length=255, null=True)
     permit_notes = models.CharField(max_length=255, null=True)
     utility_and_esid = models.CharField(max_length=255, null=True)
-    approved_permit = models.FileField()
-    battery = models.CharField(max_length=255, choices=BATTERY_CHOICES, null=True)
+    battery = models.ForeignKey('CustomerSelectOptions', models.RESTRICT, null=True, blank=True, related_name='battery_options')
     kw = models.CharField(max_length=255)
     project_cost = models.CharField(max_length=255, null=True)
     their_company_cost = models.CharField(max_length=255, null=True)
     their_company_mo = models.CharField(max_length=255, null=True)
     commission_percentage = models.CharField(max_length=255, null=True)
+    calc_red = models.CharField(max_length=255, null=True)
     bank_funded = models.CharField(max_length=255, null=True)
     adders = models.CharField(max_length=255, null=True)
     design_fee = models.CharField(max_length=255, null=True)
@@ -67,10 +60,36 @@ class Customers(models.Model):
     def get_created_by_fullname(self):
         return f'{self.created_by.first_name} {self.created_by.last_name}'
 
+    def get_customers_activity_logs(self):
+        return CustomerActivityLogs.objects.filter(customer_id=self.id).order_by('-date_created')
+
+    def approved_permit(self):
+        return CustomersAttachments.objects.filter(field='approved_permit', customer_id=self.id).first()
+
+    def contract(self):
+        return CustomersAttachments.objects.filter(field='contract', customer_id=self.id).first()
+
+    def stamped_plans(self):
+        return CustomersAttachments.objects.filter(field='stamped_plans', customer_id=self.id).first()
+
+    def ub(self):
+        return CustomersAttachments.objects.filter(field='ub', customer_id=self.id).first()
+
+    def hoi(self):
+        return CustomersAttachments.objects.filter(field='hoi', customer_id=self.id).first()
+
+    def front_of_house(self):
+        return CustomersAttachments.objects.filter(field='front_of_house', customer_id=self.id).first()
+
+    def panel_layout(self):
+        return CustomersAttachments.objects.filter(field='panel_layout', customer_id=self.id).first()
+
+    def post_install_letter(self):
+        return CustomersAttachments.objects.filter(field='post_install_letter', customer_id=self.id).first()
+
 
 class CustomersAttachments(models.Model):
     FIELD_CHOICES = [
-        ('utility_and_esid', 'Utility & ESID'),
         ('approved_permit', 'Approved Permit'),
         ('contract', 'Contract'),
         ('stamped_plans', 'Stamped Plans'),
@@ -108,4 +127,19 @@ class CustomerSelectOptions(models.Model):
     created_by = models.ForeignKey(User, models.RESTRICT)
 
 
+class CustomerActivityLogs(models.Model):
+    FIELD_TYPE_CHOICES = [
+        ('text', 'text'),
+        ('date', 'date'),
+        ('number', 'number'),
+        ('choices', 'choices'),
+    ]
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    customer = models.ForeignKey(Customers, models.RESTRICT)
+    created_by = models.ForeignKey(User, models.RESTRICT)
+    date_created = models.DateTimeField(auto_now_add=True)
+    field_name = models.CharField(max_length=255)
+    field_type = models.CharField(max_length=255)
+    from_value = models.CharField(max_length=255)
+    to_value = models.CharField(max_length=255)
 

@@ -8,7 +8,6 @@
 {% contractors request as contractors %}
 {% permit_specialists request as permit_specialists %}
 {% colors as colors %}
-{% sold_with_options as sold_with_options %}
       <!--begin::Card-->
       <div class="card">
          <!--begin::Card header-->
@@ -189,14 +188,14 @@
                      <th class="min-w-125px">Permit Plan #</th>
                      <th class="min-w-125px">Permit Notes</th>
                      <th class="min-w-125px">Utility and ESID</th>
-                     <th class="min-w-125px">Approved Permit</th>
+                     <th class="min-w-150px">Approved Permit</th>
                      <th class="min-w-125px">Contract</th>
                      <th class="min-w-125px">Stamped Plans</th>
                      <th class="min-w-125px">UB</th>
                      <th class="min-w-125px">HOI</th>
                      <th class="min-w-125px">Front of House</th>
                      <th class="min-w-125px">Panel Layout</th>
-                     <th class="min-w-125px">Post Install Letter</th>
+                     <th class="min-w-150px">Post Install Letter</th>
                      <th class="min-w-125px">Battery</th>
                      <th class="min-w-125px">KW</th>
                      <th class="min-w-125px">Project Cost</th>
@@ -234,7 +233,7 @@
                         </td>
 
                         <td>
-                           <a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{ row.name }}</a>
+                           <a onClick="viewUpdatesBtn('{{ row.id }}');" class="cursor-pointer text-gray-800 text-hover-primary mb-1" title="View Updates">{{ row.name }}</a>
                         </td>
 
                         <td>
@@ -249,7 +248,7 @@
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" value="{{ row.previous_company }}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.previous_company %}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
@@ -257,7 +256,8 @@
                            <div class="input-group input-group-sm">
                                <select name="td_sold_with" class="form-select form-select-sm form-select-solid">
                                   <option></option>
-                                   {% for i in sold_with_options %}
+                                   {% customer_selection_options 'sold_with' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
                                     {% if row.sold_with.id == i.id %}
                                         <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
                                     {% else %}
@@ -271,244 +271,362 @@
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="date" value="{% none_checker row.dob %}" name="td_dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.ss %}" name="td_ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.finance_company %}" name="td_finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.number_of_panels %}" name="td_number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="date" name="contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="date" value="{% none_checker row.contract_signed_date %}" name="td_contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
-                        </td>
-
-                        <td>
-                           <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                              <option value="Add">Add Option</option>
-                           </select>
-                        </td>
-
-                        <td>
-                           <select name="pe_stamp_requested" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
-                        </td>
-
-                        <td>
-                           <select name="permit_submited" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
-                        </td>
-
-                        <td>
-                           <select name="permit_approved" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
-                        </td>
-
-                        <td>
-                           <select name="ic_submitted" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
-                        </td>
-
-                        <td>
-                           <select name="ic_approved" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="date" name="install_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'design_requested' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.design_requested.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
                            </div>
                         </td>
 
                         <td>
-                           <select name="install_confirmed" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
+                           <div class="input-group input-group-sm">
+                               <select name="td_pe_stamp_requested" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'pe_stamp_requested' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.pe_stamp_requested.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
                         </td>
 
                         <td>
-                           <select name="install_complete" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
+                           <div class="input-group input-group-sm">
+                               <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'permit_submitted' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.permit_submitted.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
                         </td>
 
-                        <<td>
-                           <select name="equipment_ordered" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="False">No</option>
-                              <option value="True">Yes</option>
-                           </select>
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <select name="td_permit_approved" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'permit_approved' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.permit_approved.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'ic_submitted' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.ic_submitted.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <select name="td_ic_approved" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'ic_approved' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.ic_approved.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="date" value="{% none_checker row.install_date %}" name="td_install_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <select name="td_install_confirmed" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'install_confirmed' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.install_confirmed.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <select name="td_install_complete" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'install_complete' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.install_complete.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <select name="td_equipment_ordered" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'equipment_ordered' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.equipment_ordered.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
+                           </div>
                         </td>
 
                        <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.contract_value %}" name="td_contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="ahj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.ahj %}" name="td_ahj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="ahj_phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.ahj_phone %}" name="td_ahj_phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.permit_plan_number %}" name="td_permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.permit_notes %}" name="td_permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.utility_and_esid %}" name="td_utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
+                        {% if row.approved_permit %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.approved_permit.attachment }}" class="text-dark" target="_blank">ApprovedPermit.pdf</a></td>
+                        {% else %}
+                         <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
+                        {% if row.contract %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.contract.attachment }}" class="text-dark" target="_blank">Contract.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
+                        {% if row.stamped_plans %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.stamped_plans.attachment }}" class="text-dark" target="_blank">StampedPlans.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
+                        {% if row.ub %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.ub.attachment }}" class="text-dark" target="_blank">UB.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
+                        {% if row.hoi %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.hoi.attachment }}" class="text-dark" target="_blank">HOI.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
+                        {% if row.front_of_house %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.front_of_house.attachment }}" class="text-dark" target="_blank">FrontofHouse.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
+                        {% if row.panel_layout %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.panel_layout.attachment }}" class="text-dark" target="_blank">PanelLayout.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
-                        <td>{{ row.ahj }}</td>
-
-                        <td>{{ row.ahj }}</td>
-
-                        <td>
-                           <select name="battery" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                              <option value="no_battery">No Battery</option>
-                              <option value="3_kw">3 KW</option>
-                              <option value="6_kw">6 KW</option>
-                              <option value="10_kw">10 KW</option>
-                           </select>
-                        </td>
+                        {% if row.post_install_letter %}
+                        <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.post_install_letter.attachment }}" class="text-dark" target="_blank">PostInstallLetter.pdf</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="kw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                           </div>
-                        </td>
-
-                        <td>
-                           <div class="input-group input-group-sm">
-                               <input type="text" name="project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                           </div>
-                        </td>
-
-                        <td>
-                           <div class="input-group input-group-sm">
-                               <input type="text" name="their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                           </div>
-                        </td>
-
-                        <td>
-                           <div class="input-group input-group-sm">
-                               <input type="text" name="their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                           </div>
-                        </td>
-
-                        <td>
-                           <div class="input-group input-group-sm">
-                               <input type="text" name="commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                           </div>
-                        </td>
-
-                        <td>
-                           <div class="input-group input-group-sm">
-                               <input type="text" name="calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                           </div>
-                        </td>
-
-                        <td>
-                           <div class="input-group input-group-sm">
-                               <input type="text" name="bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <select name="td_battery" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                   {% customer_selection_options 'battery' as customer_selection_options %}
+                                   {% for i in customer_selection_options %}
+                                    {% if row.battery.id == i.id %}
+                                        <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                                    {% endif %}
+                                   {% endfor %}
+                                   <option value="Add">Add Option</option>
+                               </select>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="adders" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.kw %}" name="td_kw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.project_cost %}" name="td_project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="paid_to_manager" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.their_company_cost %}" name="td_their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="paid_to_closer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.their_company_mo %}" name="td_their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
                         <td>
                            <div class="input-group input-group-sm">
-                               <input type="text" name="paid_to_setter" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                               <input type="text" value="{% none_checker row.commission_percentage %}" name="td_commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.calc_red %}" name="td_calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.bank_funded %}" name="td_bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.adders %}" name="td_adders" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.design_fee %}" name="td_design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.paid_to_manager %}" name="td_paid_to_manager" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.paid_to_closer %}" name="td_paid_to_closer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                           </div>
+                        </td>
+
+                        <td>
+                           <div class="input-group input-group-sm">
+                               <input type="text" value="{% none_checker row.paid_to_setter %}" name="td_paid_to_setter" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
 
@@ -672,7 +790,13 @@
                               <label class="fs-6 fw-semibold mb-2">Sold With</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input class="form-control form-control-solid" placeholder="" name="sold_with" />
+                              <select name="sold_with" aria-label="Select a Company" data-control="select2" data-placeholder="Select a Company" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                  {% customer_selection_options 'sold_with' as customer_selection_options %}
+                                  {% for row in customer_selection_options %}
+                                  <option value="{{ row.id }}">{{ row.name }}</option>
+                                 {% endfor %}
+                              </select>
                               <!--end::Input-->
                            </div>
                            <!--begin::Input group-->
@@ -681,7 +805,7 @@
                               <label class="fs-6 fw-semibold mb-2">DOB</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <input class="form-control form-control-solid" placeholder="" name="dob" />
+                              <input class="form-control form-control-solid" placeholder="" name="dob" type="date"/>
                               <!--end::Input-->
                            </div>
                            <!--end::Input group-->
@@ -733,11 +857,12 @@
                               <label class="fs-6 fw-semibold mb-2">Battery</label>
                               <!--end::Label-->
                               <!--begin::Input-->
-                              <select name="battery" aria-label="Select a Battery" data-control="select2" data-placeholder="battery" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
-                                 <option value="no_bat">No Battery</option>
-                                 <option value="3_kw">3 KW</option>
-                                 <option value="6_kw">6 KW</option>
-                                 <option value="10_kw">10 KW</option>
+                              <select name="battery" aria-label="Select a Battery" data-control="select2" data-placeholder="Select a Battery" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                                  <option></option>
+                                  {% customer_selection_options 'battery' as customer_selection_options %}
+                                  {% for row in customer_selection_options %}
+                                  <option value="{{ row.id }}">{{ row.name }}</option>
+                                 {% endfor %}
                               </select>
                               <!--end::Input-->
                            </div>
@@ -1065,7 +1190,11 @@
             </div>
         </div>
       </div>
-{% endblock %}
+    <div class="modal fade" tabindex="-1" id="viewUpdatesModal">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content" id="viewUpdatesModalContent">
 
-{% block script %}
+            </div>
+        </div>
+      </div>
 {% endblock %}

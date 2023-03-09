@@ -9,4 +9,6 @@ urlpatterns = [
     path('add/', customer_add_page, name='backend-customer-add-page'),
     path('update/', customer_update_page, name='backend-customer-update-page'),
     path('add-option/', customer_add_option_page, name='backend-customer-add-option-page'),
+
+    path('view-updates/<slug:pk>/', customer_view_updates, name='backend-customer-view-updates-page'),
 ]

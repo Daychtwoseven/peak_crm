@@ -1,7 +1,7 @@
 from django import template
-from django.contrib.auth.models import User
 from django.db.models import Q
 from backend.customers.models import *
+from datetime import datetime
 
 register = template.Library()
 
@@ -25,6 +25,7 @@ def managers(request):
 def closers(request):
     return User.objects.filter(Q(groups__name='closer') | Q(groups__name='setter'), is_active=True).all()
 
+
 @register.simple_tag
 def contractors(request):
     return User.objects.filter(groups__name='contractor', is_active=True).all()
@@ -41,5 +42,10 @@ def colors():
 
 
 @register.simple_tag
-def sold_with_options():
-    return CustomerSelectOptions.objects.filter(field_name='sold_with').all()
+def customer_selection_options(field_name):
+    return CustomerSelectOptions.objects.filter(field_name=field_name).all()
+
+
+@register.simple_tag
+def datetime_now():
+    return datetime.now()

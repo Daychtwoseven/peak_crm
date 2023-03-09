@@ -1,10 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% load tags %}
+
+<div class="modal-body">
+    <div class="card ">
+        <div class="card-header card-header-stretch">
+            <h3 class="card-title">{{ data.name }}</h3>
+            <div class="card-toolbar">
+                <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#view_updates_updates">Updates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#view_updates_files">Files</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#view_updates_activity_log">Activity Log</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="view_updates_updates" role="tabpanel">
+                    ....
+                </div>
+
+                <div class="tab-pane fade" id="view_updates_files" role="tabpanel">
+                    ...
+                </div>
+
+                <div class="tab-pane fade" id="view_updates_activity_log" role="tabpanel">
+                    <div class="table-responsive">
+                        {% datetime_now as datetime_now %}
+                        <table class="table table-row-bordered gs-7 gy-7 gx-7 text-center">
+                            <tbody>
+                            {% for row in data.get_customers_activity_logs %}
+                                <tr>
+                                    <td><i class="bi bi-clock"></i> {{ row.date_created|timesince:datetime_now }} ago</td>
+                                    <td><i class="bi bi-person"></i> {{ row.created_by.first_name }} {{ row.created_by.last_name }}</td>
+                                    <td>
+                                        {% if row.field_type == 'text' %}
+                                        <i class="bi bi-spellcheck"></i>
+                                        {% elif row.field_type == 'number' %}
+                                        <i class="bi bi-123"></i>
+                                        {% elif row.field_type == 'date' %}
+                                        <i class="bi bi-calendar-date"></i>
+                                        {% endif %}
+                                        {{ row.field_name }}</td>
+                                    <td><span class="text-danger">{{ row.from_value }}</span></td>
+                                    <td> <i class="bi bi-arrow-right"></i> </td>
+                                    <td><span class="text-success">{{ row.to_value }}</span></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

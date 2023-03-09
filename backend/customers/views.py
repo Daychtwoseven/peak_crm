@@ -63,13 +63,21 @@ def customer_add_page(request):
             contractor = request.POST.get('contractor')
             permit_specialist = request.POST.get('permit_specialist')
             customer = Customers.objects.create(name=name, email=email, phone=phone, address=address, state=state,
-                                                previous_company=previous_company, sold_with=sold_with, dob=dob, ss=ss,
+                                                previous_company=previous_company, dob=dob, ss=ss,
                                                 finance_company=finance_company, number_of_panels=number_of_panels,
-                                                battery=battery, kw=kw, project_cost=project_cost,
+                                                kw=kw, project_cost=project_cost,
                                                 created_by=request.user)
+
+            if sold_with:
+                customer.sold_with_id = sold_with
+                customer.save()
 
             if contract_signed_date:
                 customer.contract_signed_date = contract_signed_date
+                customer.save()
+
+            if battery:
+                customer.battery_id = battery
                 customer.save()
 
             if manager:
@@ -135,19 +143,267 @@ def customer_update_page(request):
     try:
         customer = Customers.objects.get(id=request.POST.get('id'))
         field = request.POST.get('field')
-        value = request.POST.get('value')
         field_type = request.POST.get('field_type')
 
         if field_type == "selection":
+            value = CustomerSelectOptions.objects.filter(id=request.POST.get('value')).first()
             if field == "sold_with":
-                customer.sold_with_id = value
-                customer.save()
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Sold '
+                                                                                                               'With',
+                                                        from_value=customer.sold_with.name, to_value=value.name, field_type='choices')
+                    customer.sold_with = value
+                    customer.save()
+
+            elif field == "design_requested":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Design Requested',
+                                                        from_value=customer.design_requested.name, to_value=value.name)
+                    customer.design_requested = value
+                    customer.save()
+
+            elif field == "pe_stamp_requested":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='PE Stamp Requested',
+                                                        from_value=customer.pe_stamp_requested.name, to_value=value.name)
+                    customer.pe_stamp_requested = value
+                    customer.save()
+
+            elif field == "permit_submitted":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Permit Submitted',
+                                                        from_value=customer.permit_submitted.name, to_value=value.name)
+                    customer.permit_submitted = value
+                    customer.save()
+
+            elif field == "permit_approved":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Permit Approved',
+                                                        from_value=customer.permit_approved.name, to_value=value.name)
+                    customer.permit_approved = value
+                    customer.save()
+
+            elif field == "ic_submitted":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='IC Submitted',
+                                                        from_value=customer.ic_submitted.name, to_value=value.name)
+                    customer.ic_submitted = value
+                    customer.save()
+
+            elif field == "ic_approved":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='IC Approved',
+                                                        from_value=customer.ic_approved.name, to_value=value.name)
+                    customer.ic_approved = value
+                    customer.save()
+
+            elif field == "install_confirmed":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Install Confirmed',
+                                                        from_value=customer.install_confirmed.name, to_value=value.name)
+                    customer.install_confirmed = value
+                    customer.save()
+
+            elif field == "install_complete":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Install Complete',
+                                                        from_value=customer.install_complete.name, to_value=value.name)
+                    customer.install_complete = value
+                    customer.save()
+
+            elif field == "equipment_ordered":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Equipment Ordered',
+                                                        from_value=customer.equipment_ordered.name, to_value=value.name)
+                    customer.equipment_ordered = value
+                    customer.save()
+
+            elif field == "battery":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Battery',
+                                                        from_value=customer.battery.name, to_value=value.name)
+                    customer.battery = value
+                    customer.save()
+
         elif field_type == "input":
+            value = request.POST.get('value')
             if field == "previous_company":
-                customer.previous_company = value
-                customer.save()
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Previous Company',
+                                                        from_value=customer.previous_company, to_value=value, field_type='text')
+                    customer.previous_company = value
+                    customer.save()
+
+            elif field == "dob":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='DOB',
+                                                        from_value=customer.dob, to_value=value, field_type='text')
+                    customer.dob = value
+                    customer.save()
+
+            elif field == "ss":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='SS',
+                                                        from_value=customer.ss, to_value=value, field_type='text')
+                    customer.ss = value
+                    customer.save()
+
+            elif field == "finance_company":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Finance Company',
+                                                        from_value=customer.finance_company, to_value=value, field_type='text')
+                    customer.finance_company = value
+                    customer.save()
+
+            elif field == "number_of_panels":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Number of Panels',
+                                                        from_value=customer.number_of_panels, to_value=value, field_type='number')
+                    customer.number_of_panels = value
+                    customer.save()
+
+            elif field == "contract_signed_date":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Contract Signed Date',
+                                                        from_value=customer.contract_signed_date, to_value=value, field_type='date')
+                    customer.contract_signed_date = value
+                    customer.save()
+
+            elif field == "install_date":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Install Date',
+                                                        from_value=customer.install_date, to_value=value, field_type='date')
+                    customer.install_date = value
+                    customer.save()
+
+            elif field == "contract_value":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Contract Value',
+                                                        from_value=customer.contract_value, to_value=value, field_type='number')
+                    customer.contract_value = value
+                    customer.save()
+
+            elif field == "ahj":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='AHJ',
+                                                        from_value=customer.ahj, to_value=value, field_type='text')
+                    customer.ahj = value
+                    customer.save()
+
+            elif field == "ahj_phone":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='AHJ Phone',
+                                                        from_value=customer.ahj_phone, to_value=value, field_type='text')
+                    customer.ahj_phone = value
+                    customer.save()
+
+            elif field == "permit_plan_number":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Permit Plan Number',
+                                                        from_value=customer.permit_plan_number, to_value=value, field_type='number')
+                    customer.permit_plan_number = value
+                    customer.save()
+
+            elif field == "permit_notes":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Permit Notes',
+                                                        from_value=customer.permit_notes, to_value=value, field_type='text')
+                    customer.permit_notes = value
+                    customer.save()
+
+            elif field == "utility_and_esid":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Utilities and ESID',
+                                                        from_value=customer.utility_and_esid, to_value=value, field_type='text')
+                    customer.utility_and_esid = value
+                    customer.save()
+
+            elif field == "kw":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='KW',
+                                                        from_value=customer.kw, to_value=value, field_type='number')
+                    customer.kw = value
+                    customer.save()
+
+            elif field == "project_cost":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Project Cost',
+                                                        from_value=customer.project_cost, to_value=value, field_type='number')
+                    customer.project_cost = value
+                    customer.save()
+
+            elif field == "their_company_cost":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Their Company Cost',
+                                                        from_value=customer.their_company_cost, to_value=value, field_type='number')
+                    customer.their_company_cost = value
+                    customer.save()
+
+            elif field == "their_company_mo":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Their Company MO',
+                                                        from_value=customer.their_company_mo, to_value=value, field_type='number')
+                    customer.their_company_mo = value
+                    customer.save()
+
+            elif field == "commission_percentage":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Commission Percentage',
+                                                        from_value=customer.commission_percentage, to_value=value, field_type='number')
+                    customer.commission_percentage = value
+                    customer.save()
+
+            elif field == "calc_red":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Calc/Red',
+                                                        from_value=customer.calc_red, to_value=value, field_type='text')
+                    customer.calc_red = value
+                    customer.save()
+
+            elif field == "bank_funded":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Bank Funded',
+                                                        from_value=customer.bank_funded, to_value=value, field_type='text')
+                    customer.bank_funded = value
+                    customer.save()
+
+            elif field == "adders":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Adders',
+                                                        from_value=customer.adders, to_value=value, field_type='text')
+                    customer.adders = value
+                    customer.save()
+
+            elif field == "design_fee":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Design Fee',
+                                                        from_value=customer.design_fee, to_value=value, field_type='number')
+                    customer.design_fee = value
+                    customer.save()
+
+            elif field == "paid_to_manager":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Paid to Manager',
+                                                        from_value=customer.paid_to_manager, to_value=value, field_type='choices')
+                    customer.paid_to_manager = value
+                    customer.save()
+
+            elif field == "paid_to_closer":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Paid to Closer',
+                                                        from_value=customer.paid_to_closer, to_value=value, field_type='choices')
+                    customer.paid_to_closer = value
+                    customer.save()
+
+            elif field == "paid_to_setter":
+                with transaction.atomic():
+                    CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Paid to Setter',
+                                                        from_value=customer.paid_to_setter, to_value=value, field_type='choices')
+                    customer.paid_to_setter = value
+                    customer.save()
 
         return JsonResponse({'statusMsg': ' '.join(field.split('_')).title()}, status=200)
+
     except Exception as e:
         print(e)
 
@@ -168,3 +424,10 @@ def customer_add_option_page(request):
         return JsonResponse({'statusMsg': 'Empty option'}, status=404)
     except Exception as e:
         print(e)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['GET'])
+def customer_view_updates(request, pk):
+    context['data'] = Customers.objects.get(id=pk)
+    return render(request, 'backend/customers/partials/view-updates.html', context)
