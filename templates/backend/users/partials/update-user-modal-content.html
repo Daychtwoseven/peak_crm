@@ -1,0 +1,42 @@
+{% load tags %}
+
+<div class="modal-header">
+  <h1>Update User</h1>
+</div>
+<div class="modal-body">
+    <form id="updateUserForm" action="{% url 'backend-update-user-page' pk=data.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group mb-5">
+          <label class="required">Username: </label>
+          <input type="text" class="form-control" name="username" value="{{ data.username }}" required>
+        </div>
+        <div class="form-group mb-5">
+          <label>Email: </label>
+          <input type="email" class="form-control" name="email" value="{{ data.email }}">
+        </div>
+        <div class="form-group mb-5">
+          <label class="required">First Name: </label>
+          <input type="text" class="form-control" name="first_name" value="{{ data.first_name }}" required>
+        </div>
+        <div class="form-group mb-5">
+          <label class="required">Last Name: </label>
+          <input type="text" class="form-control" name="last_name" value="{{ data.last_name }}" required>
+        </div>
+        <div class="form-group mb-5">
+          <label class="required">Permission: </label>
+          <select name="permission" required class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#updateUserForm">
+            <option></option>
+            <option value="manager" {% if data.groups.all.0.name == 'manager' %} selected {% endif %}>Manager</option>
+            <option value="closer" {% if data.groups.all.0.name == 'setter' %} selected {% endif %}>Closer</option>
+            <option value="setter" {% if data.groups.all.0.name == 'closer' %} selected {% endif %}>Setter</option>
+            <option value="contractor" {% if data.groups.all.0.name == 'contractor' %} selected {% endif %}>Contractor</option>
+            <option value="permit_specialist" {% if data.groups.all.0.name == 'permit_specialist' %} selected {% endif %}>Permit Specialist</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

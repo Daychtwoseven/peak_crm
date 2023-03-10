@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 BACKEND_APPS = [
     'backend.customers',
+    'backend.users'
 ]
 
 INSTALLED_APPS += BACKEND_APPS

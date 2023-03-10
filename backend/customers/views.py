@@ -13,6 +13,7 @@ context = {}
 @require_http_methods(['GET'])
 def index_page(request):
     try:
+        print('here')
         if request.method == "GET":
             return redirect('/customers/list/')
             context['title'] = 'PEAK CRM | Customers'
@@ -147,81 +148,82 @@ def customer_update_page(request):
 
         if field_type == "selection":
             value = CustomerSelectOptions.objects.filter(id=request.POST.get('value')).first()
+            print(customer.sold_with)
             if field == "sold_with":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Sold '
                                                                                                                'With',
-                                                        from_value=customer.sold_with.name, to_value=value.name, field_type='choices')
+                                                        from_value=customer.sold_with.name if customer.sold_with else '', to_value=value.name, field_type='choices')
                     customer.sold_with = value
                     customer.save()
 
             elif field == "design_requested":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Design Requested',
-                                                        from_value=customer.design_requested.name, to_value=value.name)
+                                                        from_value=customer.design_requested.name if customer.design_requested else '', to_value=value.name)
                     customer.design_requested = value
                     customer.save()
 
             elif field == "pe_stamp_requested":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='PE Stamp Requested',
-                                                        from_value=customer.pe_stamp_requested.name, to_value=value.name)
+                                                        from_value=customer.pe_stamp_requested.name if customer.pe_stamp_requested else '', to_value=value.name)
                     customer.pe_stamp_requested = value
                     customer.save()
 
             elif field == "permit_submitted":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Permit Submitted',
-                                                        from_value=customer.permit_submitted.name, to_value=value.name)
+                                                        from_value=customer.permit_submitted.name if customer.permit_submitted else '', to_value=value.name)
                     customer.permit_submitted = value
                     customer.save()
 
             elif field == "permit_approved":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Permit Approved',
-                                                        from_value=customer.permit_approved.name, to_value=value.name)
+                                                        from_value=customer.permit_approved.name if customer.permit_approved else '', to_value=value.name)
                     customer.permit_approved = value
                     customer.save()
 
             elif field == "ic_submitted":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='IC Submitted',
-                                                        from_value=customer.ic_submitted.name, to_value=value.name)
+                                                        from_value=customer.ic_submitted.name if customer.ic_submitted else '', to_value=value.name)
                     customer.ic_submitted = value
                     customer.save()
 
             elif field == "ic_approved":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='IC Approved',
-                                                        from_value=customer.ic_approved.name, to_value=value.name)
+                                                        from_value=customer.ic_approved.name if customer.ic_approved else '', to_value=value.name)
                     customer.ic_approved = value
                     customer.save()
 
             elif field == "install_confirmed":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Install Confirmed',
-                                                        from_value=customer.install_confirmed.name, to_value=value.name)
+                                                        from_value=customer.install_confirmed.name if customer.install_confirmed else '', to_value=value.name)
                     customer.install_confirmed = value
                     customer.save()
 
             elif field == "install_complete":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Install Complete',
-                                                        from_value=customer.install_complete.name, to_value=value.name)
+                                                        from_value=customer.install_complete.name if customer.install_complete else '', to_value=value.name)
                     customer.install_complete = value
                     customer.save()
 
             elif field == "equipment_ordered":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Equipment Ordered',
-                                                        from_value=customer.equipment_ordered.name, to_value=value.name)
+                                                        from_value=customer.equipment_ordered.name if customer.equipment_ordered else '', to_value=value.name)
                     customer.equipment_ordered = value
                     customer.save()
 
             elif field == "battery":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Battery',
-                                                        from_value=customer.battery.name, to_value=value.name)
+                                                        from_value=customer.battery.name if customer.battery else '', to_value=value.name)
                     customer.battery = value
                     customer.save()
 

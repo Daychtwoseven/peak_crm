@@ -165,47 +165,77 @@
                      <th class="min-w-125px">Phone</th>
                      <th class="min-w-125px">Address</th>
                      <th class="min-w-125px">State</th>
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Previous Company</th>
                      <th class="min-w-125px">Sold With</th>
                      <th class="min-w-125px">DOB</th>
                      <th class="min-w-125px">SS</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Finance Company</th>
                      <th class="min-w-125px"># of Panels</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Contract Signed Date</th>
                      <th class="min-w-150px">Design Requested</th>
                      <th class="min-w-10px">PE Stamp Requested</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
                      <th class="min-w-10px">Permit Submitted?</th>
                      <th class="min-w-10px">Permit Approved?</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-10px">IC Submitted?</th>
                      <th class="min-w-100px">IC Approved?</th>
                      <th class="min-w-125px">Install Date</th>
                      <th class="min-w-125px">Install Confirmed</th>
                      <th class="min-w-125px">Install Complete</th>
                      <th class="min-w-125px">Equipment Ordered</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
                      <th class="min-w-125px">Contract Value</th>
                      <th class="min-w-125px">AHJ</th>
                      <th class="min-w-125px">AHJ Phone</th>
                      <th class="min-w-125px">Permit Plan #</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Permit Notes</th>
+                     {% endif %}
                      <th class="min-w-125px">Utility and ESID</th>
                      <th class="min-w-150px">Approved Permit</th>
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
                      <th class="min-w-125px">Contract</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
                      <th class="min-w-125px">Stamped Plans</th>
+                     {% endif %}
                      <th class="min-w-125px">UB</th>
                      <th class="min-w-125px">HOI</th>
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Front of House</th>
                      <th class="min-w-125px">Panel Layout</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
                      <th class="min-w-150px">Post Install Letter</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Battery</th>
                      <th class="min-w-125px">KW</th>
                      <th class="min-w-125px">Project Cost</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Their Company Cost</th>
                      <th class="min-w-125px">Their Company Mo</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
                      <th class="min-w-125px">Commission %</th>
                      <th class="min-w-125px">Calc/Red</th>
+                     {% endif %}
+                     {% if request.user.groups.all.0.name == "admin" %}
                      <th class="min-w-125px">Bank Funded</th>
                      <th class="min-w-125px">Adders</th>
                      <th class="min-w-125px">Design Fee/PE Stamp</th>
+                     {% endif %}
                      <th class="min-w-125px">Paid to Manager</th>
                      <th class="min-w-125px">Paid to Closer</th>
                      <th class="min-w-125px">Paid to Setter</th>
@@ -245,7 +275,7 @@
                         <td>{{ row.address }}</td>
 
                         <td>{{ row.state }}</td>
-
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.previous_company %}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -280,7 +310,8 @@
                                <input type="text" value="{% none_checker row.ss %}" name="td_ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
-
+                        {% endif %}
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.finance_company %}" name="td_finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -292,7 +323,8 @@
                                <input type="text" value="{% none_checker row.number_of_panels %}" name="td_number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
-
+                        {% endif %}
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="date" value="{% none_checker row.contract_signed_date %}" name="td_contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -332,7 +364,8 @@
                                </select>
                            </div>
                         </td>
-
+                        {% endif %}
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
@@ -366,7 +399,8 @@
                                </select>
                            </div>
                         </td>
-
+                        {% endif %}
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
@@ -457,7 +491,8 @@
                                </select>
                            </div>
                         </td>
-
+                        {% endif %}
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
                        <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.contract_value %}" name="td_contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -481,13 +516,14 @@
                                <input type="text" value="{% none_checker row.permit_plan_number %}" name="td_permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
-
+                        {% endif %}
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.permit_notes %}" name="td_permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
-
+                        {% endif %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.utility_and_esid %}" name="td_utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -499,16 +535,20 @@
                          <td></td>
                         {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
                         {% if row.contract %}
                         <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.contract.attachment }}" class="text-dark" target="_blank">Contract.pdf</a></td>
                         {% else %}
                         <td></td>
                         {% endif %}
+                        {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
                         {% if row.stamped_plans %}
                         <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.stamped_plans.attachment }}" class="text-dark" target="_blank">StampedPlans.pdf</a></td>
                         {% else %}
                         <td></td>
+                        {% endif %}
                         {% endif %}
 
                         {% if row.ub %}
@@ -523,6 +563,7 @@
                         <td></td>
                         {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         {% if row.front_of_house %}
                         <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.front_of_house.attachment }}" class="text-dark" target="_blank">FrontofHouse.pdf</a></td>
                         {% else %}
@@ -534,13 +575,17 @@
                         {% else %}
                         <td></td>
                         {% endif %}
+                        {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
                         {% if row.post_install_letter %}
                         <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.post_install_letter.attachment }}" class="text-dark" target="_blank">PostInstallLetter.pdf</a></td>
                         {% else %}
                         <td></td>
                         {% endif %}
+                        {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <select name="td_battery" class="form-select form-select-sm form-select-solid">
@@ -569,7 +614,9 @@
                                <input type="text" value="{% none_checker row.project_cost %}" name="td_project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
+                       {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.their_company_cost %}" name="td_their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -581,7 +628,9 @@
                                <input type="text" value="{% none_checker row.their_company_mo %}" name="td_their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
+                        {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.commission_percentage %}" name="td_commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -593,7 +642,9 @@
                                <input type="text" value="{% none_checker row.calc_red %}" name="td_calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
+                        {% endif %}
 
+                        {% if request.user.groups.all.0.name == "admin" %}
                         <td>
                            <div class="input-group input-group-sm">
                                <input type="text" value="{% none_checker row.bank_funded %}" name="td_bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
@@ -611,6 +662,7 @@
                                <input type="text" value="{% none_checker row.design_fee %}" name="td_design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                            </div>
                         </td>
+                        {% endif %}
 
                         <td>
                            <div class="input-group input-group-sm">
@@ -1197,4 +1249,16 @@
             </div>
         </div>
       </div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+<script src="{% static 'assets/js/custom/apps/customers/list/export.js' %}"></script>
+<script src="{% static 'assets/js/custom/apps/customers/list/list.js' %}"></script>
+<script src="{% static 'assets/js/custom/apps/customers/add.js' %}"></script>
+<script src="{% static 'assets/js/widgets.bundle.js' %}"></script>
+<script src="{% static 'assets/js/custom/widgets.js' %}"></script>
+<script src="{% static 'assets/js/custom/apps/chat/chat.js' %}"></script>
+<script src="{% static 'assets/js/custom/utilities/modals/upgrade-plan.js' %}"></script>
+<script src="{% static 'assets/js/custom/utilities/modals/create-app.js' %}"></script>
+<script src="{% static 'assets/js/custom/utilities/modals/users-search.js' %}"></script>
 {% endblock %}
