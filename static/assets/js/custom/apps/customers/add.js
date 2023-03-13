@@ -691,4 +691,10 @@ $(document).ready(function(){
             }
         });
     });
+
+    window.addEventListener("DOMContentLoaded", (e) => {
+          $('#filter_group').on('select2:select', function (e) {
+           $(this).get(0).dispatchEvent(new Event('change'));
+        });
+    });
 });

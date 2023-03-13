@@ -1,8 +1,8 @@
 {% extends 'base/index.html' %}
 {% load static %}
 {% load tags %}
-{% groups as groups %}
 {% block body %}
+{% groups as groups %}
 <!--begin::Card-->
 <div class="card">
    <!--begin::Card header-->
@@ -49,29 +49,31 @@
                <div class="separator border-gray-200"></div>
                <!--end::Separator-->
                <!--begin::Content-->
-               <div class="px-7 py-5">
-                  <!--begin::Input group-->
-                  <div class="mb-10">
-                     <!--begin::Label-->
-                     <label class="form-label fs-5 fw-semibold mb-3">Groups:</label>
-                     <!--end::Label-->
-                     <!--begin::Input-->
-                     <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-customer-table-filter="month" data-dropdown-parent="#kt-toolbar-filter">
-                        <option></option>
-                        {% for row in groups %}
-                        <option value="{{ row.id }}">{{ row.name|upper }}</option>
-                        {% endfor %}
-                     </select>
-                     <!--end::Input-->
-                  </div>
-                  <!--end::Input group-->
-                  <!--begin::Actions-->
-                  <div class="d-flex justify-content-end">
-                     <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
-                     <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter">Apply</button>
-                  </div>
-                  <!--end::Actions-->
-               </div>
+                <form hx-get="{% url 'backend-groups-index-page' %}" hx-target="#customer-lists" hx-swap="outerHTML" hx-trigger="click">
+                    <div class="px-7 py-5">
+                      <!--begin::Input group-->
+                      <div class="mb-10">
+                         <!--begin::Label-->
+                         <label class="form-label fs-5 fw-semibold mb-3">Groups:</label>
+                         <!--end::Label-->
+                         <!--begin::Input-->
+                         <select name="filter_group" class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#kt-toolbar-filter">
+                            <option></option>
+                            {% for row in groups %}
+                            <option value="{{ row.id }}">{{ row.name|upper }}</option>
+                            {% endfor %}
+                         </select>
+                         <!--end::Input-->
+                      </div>
+                      <!--end::Input group-->
+                      <!--begin::Actions-->
+                      <div class="d-flex justify-content-end">
+                         <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
+                         <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter">Apply</button>
+                      </div>
+                      <!--end::Actions-->
+                   </div>
+                </form>
                <!--end::Content-->
             </div>
             <!--end::Menu 1-->
@@ -93,8 +95,9 @@
       </div>
       <!--end::Card toolbar-->
    </div>
-
-   {% include 'backend/customers/partials/lists-table.html' %}
+   <div class="card-body pt-0" id="customer-lists">
+        {% include 'backend/customers/partials/lists-table.html' %}
+   </div>
    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-hidden="true">
       <!--begin::Modal dialog-->
       <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -160,4 +163,6 @@
 <script src="{% static 'assets/js/custom/utilities/modals/upgrade-plan.js' %}"></script>
 <script src="{% static 'assets/js/custom/utilities/modals/create-app.js' %}"></script>
 <script src="{% static 'assets/js/custom/utilities/modals/users-search.js' %}"></script>
+<script src="https://unpkg.com/htmx.org@1.8.6"></script>
 {% endblock %}
+</div>

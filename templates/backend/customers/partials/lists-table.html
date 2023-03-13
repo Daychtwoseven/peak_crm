@@ -6,574 +6,572 @@
 {% contractors request as contractors %}
 {% permit_specialists request as permit_specialists %}
 {% colors as colors %}
-<div class="card-body pt-0">
-    <!--end::Table head-->
-    <table class="table align-middle table-row-bordered" id="kt_customers_table">
-        <!--begin::Table head-->
-        <thead>
-        <!--begin::Table row-->
-        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-            <th class="w-10px pe-2">
-                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
-                </div>
-            </th>
-            <th class="min-w-125px">Name</th>
-            <th class="min-w-125px">Email</th>
-            <th class="min-w-125px">Phone</th>
-            <th class="min-w-125px">Address</th>
-            <th class="min-w-125px">State</th>
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Previous Company</th>
-            <th class="min-w-125px">Sold With</th>
-            <th class="min-w-125px">DOB</th>
-            <th class="min-w-125px">SS</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Finance Company</th>
-            <th class="min-w-125px"># of Panels</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Contract Signed Date</th>
-            <th class="min-w-150px">Design Requested</th>
-            <th class="min-w-10px">PE Stamp Requested</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
-            <th class="min-w-10px">Permit Submitted?</th>
-            <th class="min-w-10px">Permit Approved?</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-10px">IC Submitted?</th>
-            <th class="min-w-100px">IC Approved?</th>
-            <th class="min-w-125px">Install Date</th>
-            <th class="min-w-125px">Install Confirmed</th>
-            <th class="min-w-125px">Install Complete</th>
-            <th class="min-w-125px">Equipment Ordered</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
-            <th class="min-w-125px">Contract Value</th>
-            <th class="min-w-125px">AHJ</th>
-            <th class="min-w-125px">AHJ Phone</th>
-            <th class="min-w-125px">Permit Plan #</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Permit Notes</th>
-            {% endif %}
-            <th class="min-w-125px">Utility and ESID</th>
-            <th class="min-w-150px">Approved Permit</th>
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
-            <th class="min-w-125px">Contract</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-            <th class="min-w-125px">Stamped Plans</th>
-            {% endif %}
-            <th class="min-w-125px">UB</th>
-            <th class="min-w-125px">HOI</th>
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Front of House</th>
-            <th class="min-w-125px">Panel Layout</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-            <th class="min-w-150px">Post Install Letter</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Battery</th>
-            <th class="min-w-125px">KW</th>
-            <th class="min-w-125px">Project Cost</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Their Company Cost</th>
-            <th class="min-w-125px">Their Company Mo</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
-            <th class="min-w-125px">Commission %</th>
-            <th class="min-w-125px">Calc/Red</th>
-            {% endif %}
-            {% if request.user.groups.all.0.name == "admin" %}
-            <th class="min-w-125px">Bank Funded</th>
-            <th class="min-w-125px">Adders</th>
-            <th class="min-w-125px">Design Fee/PE Stamp</th>
-            {% endif %}
-            <th class="min-w-125px">Paid to Manager</th>
-            <th class="min-w-125px">Paid to Closer</th>
-            <th class="min-w-125px">Paid to Setter</th>
-            <th class="min-w-125px">Manager</th>
-            <th class="min-w-125px">Setter</th>
-            <th class="min-w-125px">Closer</th>
-            <th class="min-w-125px">Contractor</th>
-            <th class="min-w-125px">Permit Specialist</th>
-            <th class="min-w-125px">People</th>
-            <th class="min-w-150px">Creation Log</th>
-        </tr>
-        <!--end::Table row-->
-        </thead>
-        <!--begin::Table body-->
-           <tbody class="fw-semibold text-gray-600" id="kt_customers_tbody">
-              {% for row in data %}
-                 <tr>
-                    <!--begin::Checkbox-->
-                    <td>
-                       <div class="form-check form-check-sm form-check-custom form-check-solid">
-                          <input class="form-check-input" type="checkbox" value="1" />
-                          <input type="hidden" name="id_customer" value="{{ row.id }}">
-                       </div>
-                    </td>
 
-                    <td>
-                       <a onClick="viewUpdatesBtn('{{ row.id }}');" class="cursor-pointer text-gray-800 text-hover-primary mb-1" title="View Updates">{{ row.name }}</a>
-                    </td>
+<!--end::Table head-->
+<table class="table align-middle table-row-bordered" id="kt_customers_table">
+    <!--begin::Table head-->
+    <thead>
+    <!--begin::Table row-->
+    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+        <th class="w-10px pe-2">
+            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
+            </div>
+        </th>
+        <th class="min-w-125px">Name</th>
+        <th class="min-w-125px">Email</th>
+        <th class="min-w-125px">Phone</th>
+        <th class="min-w-125px">Address</th>
+        <th class="min-w-125px">State</th>
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Previous Company</th>
+        <th class="min-w-125px">Sold With</th>
+        <th class="min-w-125px">DOB</th>
+        <th class="min-w-125px">SS</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Finance Company</th>
+        <th class="min-w-125px"># of Panels</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Contract Signed Date</th>
+        <th class="min-w-150px">Design Requested</th>
+        <th class="min-w-10px">PE Stamp Requested</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
+        <th class="min-w-10px">Permit Submitted?</th>
+        <th class="min-w-10px">Permit Approved?</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-10px">IC Submitted?</th>
+        <th class="min-w-100px">IC Approved?</th>
+        <th class="min-w-125px">Install Date</th>
+        <th class="min-w-125px">Install Confirmed</th>
+        <th class="min-w-125px">Install Complete</th>
+        <th class="min-w-125px">Equipment Ordered</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
+        <th class="min-w-125px">Contract Value</th>
+        <th class="min-w-125px">AHJ</th>
+        <th class="min-w-125px">AHJ Phone</th>
+        <th class="min-w-125px">Permit Plan #</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Permit Notes</th>
+        {% endif %}
+        <th class="min-w-125px">Utility and ESID</th>
+        <th class="min-w-150px">Approved Permit</th>
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
+        <th class="min-w-125px">Contract</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
+        <th class="min-w-125px">Stamped Plans</th>
+        {% endif %}
+        <th class="min-w-125px">UB</th>
+        <th class="min-w-125px">HOI</th>
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Front of House</th>
+        <th class="min-w-125px">Panel Layout</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
+        <th class="min-w-150px">Post Install Letter</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Battery</th>
+        <th class="min-w-125px">KW</th>
+        <th class="min-w-125px">Project Cost</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Their Company Cost</th>
+        <th class="min-w-125px">Their Company Mo</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
+        <th class="min-w-125px">Commission %</th>
+        <th class="min-w-125px">Calc/Red</th>
+        {% endif %}
+        {% if request.user.groups.all.0.name == "admin" %}
+        <th class="min-w-125px">Bank Funded</th>
+        <th class="min-w-125px">Adders</th>
+        <th class="min-w-125px">Design Fee/PE Stamp</th>
+        {% endif %}
+        <th class="min-w-125px">Paid to Manager</th>
+        <th class="min-w-125px">Paid to Closer</th>
+        <th class="min-w-125px">Paid to Setter</th>
+        <th class="min-w-125px">Manager</th>
+        <th class="min-w-125px">Setter</th>
+        <th class="min-w-125px">Closer</th>
+        <th class="min-w-125px">Contractor</th>
+        <th class="min-w-125px">Permit Specialist</th>
+        <th class="min-w-125px">People</th>
+        <th class="min-w-150px">Creation Log</th>
+    </tr>
+    <!--end::Table row-->
+    </thead>
+    <!--begin::Table body-->
+       <tbody class="fw-semibold text-gray-600" id="kt_customers_tbody">
+          {% for row in data %}
+             <tr>
+                <!--begin::Checkbox-->
+                <td>
+                   <div class="form-check form-check-sm form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="1" />
+                      <input type="hidden" name="id_customer" value="{{ row.id }}">
+                   </div>
+                </td>
 
-                    <td>
-                       <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ row.email }}</a>
-                    </td>
+                <td>
+                   <a onClick="viewUpdatesBtn('{{ row.id }}');" class="cursor-pointer text-gray-800 text-hover-primary mb-1" title="View Updates">{{ row.name }}</a>
+                </td>
 
-                    <td>{{ row.phone }}</td>
+                <td>
+                   <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ row.email }}</a>
+                </td>
 
-                    <td>{{ row.address }}</td>
+                <td>{{ row.phone }}</td>
 
-                    <td>{{ row.state }}</td>
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.previous_company %}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>{{ row.address }}</td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_sold_with" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'sold_with' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.sold_with.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>{{ row.state }}</td>
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.previous_company %}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="date" value="{% none_checker row.dob %}" name="td_dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_sold_with" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'sold_with' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.sold_with.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.ss %}" name="td_ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.finance_company %}" name="td_finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="date" value="{% none_checker row.dob %}" name="td_dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.number_of_panels %}" name="td_number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="date" value="{% none_checker row.contract_signed_date %}" name="td_contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.ss %}" name="td_ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.finance_company %}" name="td_finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'design_requested' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.design_requested.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.number_of_panels %}" name="td_number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="date" value="{% none_checker row.contract_signed_date %}" name="td_contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_pe_stamp_requested" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'pe_stamp_requested' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.pe_stamp_requested.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
-                    {% endif %}
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'permit_submitted' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.permit_submitted.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'design_requested' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.design_requested.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_permit_approved" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'permit_approved' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.permit_approved.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
-                    {% endif %}
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'ic_submitted' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.ic_submitted.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_pe_stamp_requested" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'pe_stamp_requested' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.pe_stamp_requested.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
+                {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'permit_submitted' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.permit_submitted.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_ic_approved" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'ic_approved' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.ic_approved.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_permit_approved" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'permit_approved' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.permit_approved.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
+                {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'ic_submitted' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.ic_submitted.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="date" value="{% none_checker row.install_date %}" name="td_install_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_ic_approved" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'ic_approved' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.ic_approved.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_install_confirmed" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'install_confirmed' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.install_confirmed.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="date" value="{% none_checker row.install_date %}" name="td_install_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_install_complete" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'install_complete' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.install_complete.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_install_confirmed" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'install_confirmed' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.install_confirmed.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_equipment_ordered" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'equipment_ordered' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.equipment_ordered.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
-                    {% endif %}
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
-                   <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.contract_value %}" name="td_contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_install_complete" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'install_complete' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.install_complete.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.ahj %}" name="td_ahj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_equipment_ordered" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'equipment_ordered' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.equipment_ordered.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
+                {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
+               <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.contract_value %}" name="td_contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.ahj_phone %}" name="td_ahj_phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.ahj %}" name="td_ahj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.permit_plan_number %}" name="td_permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.permit_notes %}" name="td_permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.utility_and_esid %}" name="td_utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% if row.approved_permit %}
-                    <td>
-                        <i class="bi bi-filetype-pdf"></i> <a href="{{ row.approved_permit.attachment }}" class="text-dark" target="_blank">ApprovedPermit.pdf</a>
-                    </td>
-                    {% else %}
-                     <td></td>
-                    {% endif %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.ahj_phone %}" name="td_ahj_phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
-                    {% if row.contract %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.contract.attachment }}" class="text-dark" target="_blank">Contract.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
-                    {% endif %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.permit_plan_number %}" name="td_permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.permit_notes %}" name="td_permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.utility_and_esid %}" name="td_utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% if row.approved_permit %}
+                <td>
+                    <i class="bi bi-filetype-pdf"></i> <a href="{{ row.approved_permit.attachment }}" class="text-dark" target="_blank">ApprovedPermit.pdf</a>
+                </td>
+                {% else %}
+                 <td></td>
+                {% endif %}
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-                    {% if row.stamped_plans %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.stamped_plans.attachment }}" class="text-dark" target="_blank">StampedPlans.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
-                    {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
+                {% if row.contract %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.contract.attachment }}" class="text-dark" target="_blank">Contract.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% endif %}
 
-                    {% if row.ub %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.ub.attachment }}" class="text-dark" target="_blank">UB.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
+                {% if row.stamped_plans %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.stamped_plans.attachment }}" class="text-dark" target="_blank">StampedPlans.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% endif %}
 
-                    {% if row.hoi %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.hoi.attachment }}" class="text-dark" target="_blank">HOI.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
+                {% if row.ub %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.ub.attachment }}" class="text-dark" target="_blank">UB.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    {% if row.front_of_house %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.front_of_house.attachment }}" class="text-dark" target="_blank">FrontofHouse.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
+                {% if row.hoi %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.hoi.attachment }}" class="text-dark" target="_blank">HOI.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
 
-                    {% if row.panel_layout %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.panel_layout.attachment }}" class="text-dark" target="_blank">PanelLayout.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
-                    {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                {% if row.front_of_house %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.front_of_house.attachment }}" class="text-dark" target="_blank">FrontofHouse.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-                    {% if row.post_install_letter %}
-                    <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.post_install_letter.attachment }}" class="text-dark" target="_blank">PostInstallLetter.pdf</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
-                    {% endif %}
+                {% if row.panel_layout %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.panel_layout.attachment }}" class="text-dark" target="_blank">PanelLayout.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% endif %}
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <select name="td_battery" class="form-select form-select-sm form-select-solid">
-                              <option></option>
-                               {% customer_selection_options 'battery' as customer_selection_options %}
-                               {% for i in customer_selection_options %}
-                                {% if row.battery.id == i.id %}
-                                    <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                                {% else %}
-                                    <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                                {% endif %}
-                               {% endfor %}
-                               <option value="Add">Add Option</option>
-                           </select>
-                       </div>
-                    </td>
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
+                {% if row.post_install_letter %}
+                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.post_install_letter.attachment }}" class="text-dark" target="_blank">PostInstallLetter.pdf</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% endif %}
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.kw %}" name="td_kw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <select name="td_battery" class="form-select form-select-sm form-select-solid">
+                          <option></option>
+                           {% customer_selection_options 'battery' as customer_selection_options %}
+                           {% for i in customer_selection_options %}
+                            {% if row.battery.id == i.id %}
+                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+                            {% endif %}
+                           {% endfor %}
+                           <option value="Add">Add Option</option>
+                       </select>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.project_cost %}" name="td_project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                   {% endif %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.kw %}" name="td_kw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.their_company_cost %}" name="td_their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.project_cost %}" name="td_project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+               {% endif %}
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.their_company_mo %}" name="td_their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.their_company_cost %}" name="td_their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.commission_percentage %}" name="td_commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.their_company_mo %}" name="td_their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.calc_red %}" name="td_calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
+                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.commission_percentage %}" name="td_commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    {% if request.user.groups.all.0.name == "admin" %}
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.bank_funded %}" name="td_bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.calc_red %}" name="td_calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.adders %}" name="td_adders" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                {% if request.user.groups.all.0.name == "admin" %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.bank_funded %}" name="td_bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.design_fee %}" name="td_design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
-                    {% endif %}
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.adders %}" name="td_adders" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.paid_to_manager %}" name="td_paid_to_manager" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.design_fee %}" name="td_design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
+                {% endif %}
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.paid_to_closer %}" name="td_paid_to_closer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.paid_to_manager %}" name="td_paid_to_manager" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td>
-                       <div class="input-group input-group-sm">
-                           <input type="text" value="{% none_checker row.paid_to_setter %}" name="td_paid_to_setter" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                       </div>
-                    </td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.paid_to_closer %}" name="td_paid_to_closer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td class="bg-warning text-white">{% if row.manager %} {{ row.manager.first_name }} {{ row.manager.last_name }} {% endif %}</td>
+                <td>
+                   <div class="input-group input-group-sm">
+                       <input type="text" value="{% none_checker row.paid_to_setter %}" name="td_paid_to_setter" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                   </div>
+                </td>
 
-                    <td class="bg-success text-white">{% if row.setter %} {{ row.setter.first_name }} {{ row.setter.last_name }} {% endif %}</td>
+                <td class="bg-warning text-white">{% if row.manager %} {{ row.manager.first_name }} {{ row.manager.last_name }} {% endif %}</td>
 
-                    <td class="bg-info text-white">{% if row.closer %} {{ row.closer.first_name }} {{ row.closer.last_name }} {% endif %}</td>
+                <td class="bg-success text-white">{% if row.setter %} {{ row.setter.first_name }} {{ row.setter.last_name }} {% endif %}</td>
 
-                    <td class="bg-success text-white">{% if row.contractor %} {{ row.contractor.first_name }} {{ row.contractor.last_name }} {% endif %}</td>
+                <td class="bg-info text-white">{% if row.closer %} {{ row.closer.first_name }} {{ row.closer.last_name }} {% endif %}</td>
 
-                    <td class="bg-info text-white">{% if row.permit_specialist %} {{ row.permit_specialist.first_name }} {{ row.permit_specialist.last_name }} {% endif %}</td>
-                    <td>
-                       <div class="symbol-group symbol-hover flex-nowrap">
-                         {% for i in row.get_people %}
-                         <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title="{{ i.get_fullname }}">
-                             <span class="symbol-label bg-{{ colors|random }} text-gray-300 fw-bold">{{ i.get_fullname|make_list|first }}</span>
-                         </div>
-                          {% endfor %}
-                         <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
-                             <span class="symbol-label bg-dark text-gray-300 fs-8 fw-bold">+42</span>
-                         </a>
+                <td class="bg-success text-white">{% if row.contractor %} {{ row.contractor.first_name }} {{ row.contractor.last_name }} {% endif %}</td>
+
+                <td class="bg-info text-white">{% if row.permit_specialist %} {{ row.permit_specialist.first_name }} {{ row.permit_specialist.last_name }} {% endif %}</td>
+                <td>
+                   <div class="symbol-group symbol-hover flex-nowrap">
+                     {% for i in row.get_people %}
+                     <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title="{{ i.get_fullname }}">
+                         <span class="symbol-label bg-{{ colors|random }} text-gray-300 fw-bold">{{ i.get_fullname|make_list|first }}</span>
                      </div>
-                    </td>
-                    <td>
-                       <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title='Created by {{ row.get_created_by_fullname|capfirst }} on {{ row.date_created|date:"F j, Y" }} at {{ row.date_created|date:"f A" }}'>
-                          <img alt="Pic" src="{% static 'assets/media/avatars/blank.png' %}" /> &nbsp;<small>{{ row.date_created|date:"N j" }}</small>
-                       </div>
-                    </td>
-                 </tr>
-              {% endfor %}
-           </tbody>
-           <!--end::Table body-->
-        </table>
-           <!--end::Table-->
-     </div>
-     <!--end::Card body-->
-  </div>
+                      {% endfor %}
+                     <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+                         <span class="symbol-label bg-dark text-gray-300 fs-8 fw-bold">+42</span>
+                     </a>
+                 </div>
+                </td>
+                <td>
+                   <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title='Created by {{ row.get_created_by_fullname|capfirst }} on {{ row.date_created|date:"F j, Y" }} at {{ row.date_created|date:"f A" }}'>
+                      <img alt="Pic" src="{% static 'assets/media/avatars/blank.png' %}" /> &nbsp;<small>{{ row.date_created|date:"N j" }}</small>
+                   </div>
+                </td>
+             </tr>
+          {% endfor %}
+       </tbody>
+       <!--end::Table body-->
+    </table>
+       <!--end::Table-->
+ </div>
   <!--end::Card-->

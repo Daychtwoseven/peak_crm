@@ -444,3 +444,19 @@ def add_group_page(request):
         return JsonResponse({'statusMsg': 'Success'}, status=200)
     except Exception as e:
         print(e)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['GET'])
+def groups_index_page(request):
+    try:
+        print(type(request.GET.get('filter_group')))
+        if request.GET.get('filter_group'):
+            print('here')
+            context['data'] = Customers.objects.filter(group_id=request.GET.get('filter_group')).all()
+            return render(request, 'backend/customers/partials/lists-table.html', context)
+        elif not request.GET.get('filter_group'):
+            context['data'] = Customers.objects.all()
+            return render(request, 'backend/customers/partials/lists-table.html', context)
+    except Exception as e:
+        print(e)
