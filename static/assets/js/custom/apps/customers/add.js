@@ -639,4 +639,56 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('#addGroupForm').on('submit', (e) => {
+        e.preventDefault();
+        Swal.fire({
+            text: "Are you sure you would like to add?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Yes, add it!",
+            cancelButtonText: "No, return",
+            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+        }).then((result) => {
+            if(result['isConfirmed']){
+                 $('#addGroupSubmitBtn').attr('data-kt-indicator', 'on').attr('disabled', true);
+                 const formData = $('#addGroupForm').serialize();
+                 $.ajax({
+                     type: 'POST',
+                     url: '/customers/add-group/',
+                     data: formData,
+                     success: (result) => {
+                         const statusMsg = result['statusMsg'];
+                         Swal.fire({
+                             text: statusMsg,
+                             icon: "success",
+                             buttonsStyling: false,
+                             confirmButtonText: "Close",
+                             customClass: {
+                                 confirmButton: "btn btn-primary"
+                             }
+                         }).then(() => {
+                             $('#addGroupSubmitBtn').attr('data-kt-indicator', 'off').attr('disabled', false);
+                             $('#addGroupForm').trigger('reset');
+                         });
+                     },
+                     error: (result) => {
+                         const statusMsg = result['responseJSON']['statusMsg'];
+                         Swal.fire({
+                             text: statusMsg,
+                             icon: "error",
+                             buttonsStyling: false,
+                             confirmButtonText: "Ok, got it!",
+                             customClass: {
+                                 confirmButton: "btn btn-primary"
+                             }
+                         }).then(() => {
+                             $('#addGroupSubmitBtn').attr('data-kt-indicator', 'off').attr('disabled', false);
+                         });
+                     }
+                 });
+            }
+        });
+    });
 });

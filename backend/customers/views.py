@@ -433,3 +433,14 @@ def customer_add_option_page(request):
 def customer_view_updates(request, pk):
     context['data'] = Customers.objects.get(id=pk)
     return render(request, 'backend/customers/partials/view-updates.html', context)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['POST'])
+def add_group_page(request):
+    try:
+        name = request.POST.get('name')
+        group = CustomerGroups.objects.create(name=name, created_by=request.user)
+        return JsonResponse({'statusMsg': 'Success'}, status=200)
+    except Exception as e:
+        print(e)

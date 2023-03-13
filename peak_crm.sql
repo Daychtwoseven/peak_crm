@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 13/03/2023 12:40:58
+ Date: 13/03/2023 16:18:07
 */
 
 SET NAMES utf8mb4;
@@ -419,6 +419,7 @@ CREATE TABLE `customers_customerselectoptions`  (
   `field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `date_created` datetime(6) NOT NULL,
   `created_by_id` int NOT NULL,
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customers_customerse_created_by_id_2135e577_fk_auth_user`(`created_by_id`) USING BTREE,
   CONSTRAINT `customers_customerse_created_by_id_2135e577_fk_auth_user` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -427,34 +428,34 @@ CREATE TABLE `customers_customerselectoptions`  (
 -- ----------------------------
 -- Records of customers_customerselectoptions
 -- ----------------------------
-INSERT INTO `customers_customerselectoptions` VALUES ('060360e587494499b69762b51af0fb14', 'No', 'design_requested', '2023-03-05 13:17:50.186812', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('16feb1e4233749ccbf0c6f9fed464ad0', 'Yes', 'equipment_ordered', '2023-03-05 13:13:13.125073', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('185ca78c530346d1a328565e2c4e6737', 'SAMPLE COMPANY', 'sold_with', '2023-03-04 23:33:35.302998', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('1c46cae2aae840be94662fa63ddca65e', 'No', 'install_confirmed', '2023-03-05 13:12:36.476956', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('3a12c7b61a824f41a28dc5fe633cca94', 'Yes', 'install_confirmed', '2023-03-05 12:40:58.332538', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('41425f5eb4f4488985c05309d5f303d4', 'No Battery', 'battery', '2023-03-05 13:06:06.553536', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('48a49920152747a59b3898955c9c6c6e', 'No', 'permit_approved', '2023-03-05 13:10:42.653613', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('4a8bc2b9f03142cda4ea562381c462bf', 'Yes', 'permit_submitted', '2023-03-05 13:09:47.540148', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('4f1e644d977747d0a88a627c78fc8bd0', 'Yes', 'permit_approved', '2023-03-05 13:09:54.771610', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('5640ff049e39452d99d29bb887455a84', '3 KW', 'battery', '2023-03-05 13:07:16.785401', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('5f7a4c8759a34358b786de529036f324', 'No', 'install_complete', '2023-03-05 13:12:43.221096', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('62e213828d6648438530814547898c76', 'Yes', 'ic_approved', '2023-03-05 13:10:10.461923', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('6691f8b9bd3346a5b59d4e65829ae6d6', 'Yes', 'pe_stamp_requested', '2023-03-05 13:09:36.534354', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('6efd20ca11b24097b76dff531afedce9', 'NO', 'equipment_ordered', '2023-03-05 13:12:54.979984', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('94ddb2016ebf480fba29bae4845ab1a8', 'Yes', 'install_complete', '2023-03-05 13:13:23.811224', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('9634692781424543a303fd381954df7e', 'Yes', 'ic_submitted', '2023-03-05 13:10:01.862610', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('9750859c8dd14eaeb5f2516acd9c829f', 'No', 'ic_approved', '2023-03-05 13:10:14.607574', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('a555ccc86d544d64ae2b7835a1ab54ca', 'No', 'ic_submitted', '2023-03-05 13:10:52.094421', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('aadf0e2443c14930b7d04d8777e3af1b', 'Company 2', 'sold_with', '2023-03-04 23:47:08.857891', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('bc93e114a9a648f6bee18d55394d5471', '10 KW', 'battery', '2023-03-05 13:07:36.412832', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('be0872f8da4e47ad8e71641b6710570c', 'YES', 'sold_with', '2023-03-05 12:16:22.932508', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('cdc06d68f0f648579589d2942c83c5de', 'No', 'permit_submitted', '2023-03-05 13:10:31.929564', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('d489ec0c0e5d4d04825e4d3cfa34e080', 'yes', 'sold_with', '2023-03-05 13:08:45.121431', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('dbad68e5f91d4ef08e47399cc2bba4cc', 'Yes', 'design_requested', '2023-03-05 13:09:08.555632', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('df9de0c069704307b093795c4950fd7d', 'No', 'pe_stamp_requested', '2023-03-05 13:10:23.727564', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('ee9422c3598341b8ae9663bebf4ff25e', 'ZXC', 'sold_with', '2023-03-05 13:08:38.251250', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('f17cb5763edb4865b01829350b8815ee', 'TEST', 'sold_with', '2023-03-05 13:08:30.605852', 1);
-INSERT INTO `customers_customerselectoptions` VALUES ('f36ec6adcec2498f8e3c36ed48eb7de9', '6 KW', 'battery', '2023-03-05 13:07:29.369686', 1);
+INSERT INTO `customers_customerselectoptions` VALUES ('060360e587494499b69762b51af0fb14', 'No', 'design_requested', '2023-03-05 13:17:50.186812', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('16feb1e4233749ccbf0c6f9fed464ad0', 'Yes', 'equipment_ordered', '2023-03-05 13:13:13.125073', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('185ca78c530346d1a328565e2c4e6737', 'SAMPLE COMPANY', 'sold_with', '2023-03-04 23:33:35.302998', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('1c46cae2aae840be94662fa63ddca65e', 'No', 'install_confirmed', '2023-03-05 13:12:36.476956', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('3a12c7b61a824f41a28dc5fe633cca94', 'Yes', 'install_confirmed', '2023-03-05 12:40:58.332538', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('41425f5eb4f4488985c05309d5f303d4', 'No Battery', 'battery', '2023-03-05 13:06:06.553536', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('48a49920152747a59b3898955c9c6c6e', 'No', 'permit_approved', '2023-03-05 13:10:42.653613', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('4a8bc2b9f03142cda4ea562381c462bf', 'Yes', 'permit_submitted', '2023-03-05 13:09:47.540148', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('4f1e644d977747d0a88a627c78fc8bd0', 'Yes', 'permit_approved', '2023-03-05 13:09:54.771610', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('5640ff049e39452d99d29bb887455a84', '3 KW', 'battery', '2023-03-05 13:07:16.785401', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('5f7a4c8759a34358b786de529036f324', 'No', 'install_complete', '2023-03-05 13:12:43.221096', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('62e213828d6648438530814547898c76', 'Yes', 'ic_approved', '2023-03-05 13:10:10.461923', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('6691f8b9bd3346a5b59d4e65829ae6d6', 'Yes', 'pe_stamp_requested', '2023-03-05 13:09:36.534354', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('6efd20ca11b24097b76dff531afedce9', 'NO', 'equipment_ordered', '2023-03-05 13:12:54.979984', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('94ddb2016ebf480fba29bae4845ab1a8', 'Yes', 'install_complete', '2023-03-05 13:13:23.811224', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('9634692781424543a303fd381954df7e', 'Yes', 'ic_submitted', '2023-03-05 13:10:01.862610', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('9750859c8dd14eaeb5f2516acd9c829f', 'No', 'ic_approved', '2023-03-05 13:10:14.607574', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('a555ccc86d544d64ae2b7835a1ab54ca', 'No', 'ic_submitted', '2023-03-05 13:10:52.094421', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('aadf0e2443c14930b7d04d8777e3af1b', 'Company 2', 'sold_with', '2023-03-04 23:47:08.857891', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('bc93e114a9a648f6bee18d55394d5471', '10 KW', 'battery', '2023-03-05 13:07:36.412832', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('be0872f8da4e47ad8e71641b6710570c', 'YES', 'sold_with', '2023-03-05 12:16:22.932508', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('cdc06d68f0f648579589d2942c83c5de', 'No', 'permit_submitted', '2023-03-05 13:10:31.929564', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('d489ec0c0e5d4d04825e4d3cfa34e080', 'yes', 'sold_with', '2023-03-05 13:08:45.121431', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('dbad68e5f91d4ef08e47399cc2bba4cc', 'Yes', 'design_requested', '2023-03-05 13:09:08.555632', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('df9de0c069704307b093795c4950fd7d', 'No', 'pe_stamp_requested', '2023-03-05 13:10:23.727564', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('ee9422c3598341b8ae9663bebf4ff25e', 'ZXC', 'sold_with', '2023-03-05 13:08:38.251250', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('f17cb5763edb4865b01829350b8815ee', 'TEST', 'sold_with', '2023-03-05 13:08:30.605852', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('f36ec6adcec2498f8e3c36ed48eb7de9', '6 KW', 'battery', '2023-03-05 13:07:29.369686', 1, '');
 
 -- ----------------------------
 -- Table structure for customers_customerspeople
@@ -634,6 +635,8 @@ INSERT INTO `django_migrations` VALUES (48, 'customers', '0028_customeractivityl
 INSERT INTO `django_migrations` VALUES (49, 'customers', '0029_alter_customers_approved_permit', '2023-03-09 15:23:17.443727');
 INSERT INTO `django_migrations` VALUES (50, 'customers', '0030_remove_customers_approved_permit_and_more', '2023-03-09 15:26:09.505196');
 INSERT INTO `django_migrations` VALUES (51, 'customers', '0031_alter_customers_battery_and_more', '2023-03-12 18:53:07.729316');
+INSERT INTO `django_migrations` VALUES (52, 'customers', '0032_customerselectoptions_color', '2023-03-13 13:47:44.782202');
+INSERT INTO `django_migrations` VALUES (53, 'customers', '0033_alter_customerselectoptions_color', '2023-03-13 13:48:04.507394');
 
 -- ----------------------------
 -- Table structure for django_session
