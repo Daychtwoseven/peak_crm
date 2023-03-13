@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 10/03/2023 22:39:15
+ Date: 13/03/2023 12:40:58
 */
 
 SET NAMES utf8mb4;
@@ -69,7 +69,7 @@ CREATE TABLE `auth_permission`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `auth_permission_content_type_id_codename_01ab375a_uniq`(`content_type_id`, `codename`) USING BTREE,
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 65 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -134,6 +134,10 @@ INSERT INTO `auth_permission` VALUES (57, 'Can add customer activity logs', 13, 
 INSERT INTO `auth_permission` VALUES (58, 'Can change customer activity logs', 13, 'change_customeractivitylogs');
 INSERT INTO `auth_permission` VALUES (59, 'Can delete customer activity logs', 13, 'delete_customeractivitylogs');
 INSERT INTO `auth_permission` VALUES (60, 'Can view customer activity logs', 13, 'view_customeractivitylogs');
+INSERT INTO `auth_permission` VALUES (61, 'Can add customer groups', 14, 'add_customergroups');
+INSERT INTO `auth_permission` VALUES (62, 'Can change customer groups', 14, 'change_customergroups');
+INSERT INTO `auth_permission` VALUES (63, 'Can delete customer groups', 14, 'delete_customergroups');
+INSERT INTO `auth_permission` VALUES (64, 'Can view customer groups', 14, 'view_customergroups');
 
 -- ----------------------------
 -- Table structure for auth_user
@@ -158,11 +162,11 @@ CREATE TABLE `auth_user`  (
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
-INSERT INTO `auth_user` VALUES (1, 'pbkdf2_sha256$390000$7SuS5pb2vwP8KF1phhOs0N$6D/O3ROgmblCfxaMkouDuaagSNpezdmaEWz8gXclTnk=', '2023-03-10 22:35:10.817393', 1, 'admin', 'Chad', 'Escol', 'admin@gmail.com', 1, 1, '2023-02-27 09:02:05.000000');
+INSERT INTO `auth_user` VALUES (1, 'pbkdf2_sha256$390000$7SuS5pb2vwP8KF1phhOs0N$6D/O3ROgmblCfxaMkouDuaagSNpezdmaEWz8gXclTnk=', '2023-03-12 18:43:20.401049', 1, 'admin', 'Chad', 'Escol', 'admin@gmail.com', 1, 1, '2023-02-27 09:02:05.000000');
 INSERT INTO `auth_user` VALUES (2, 'pbkdf2_sha256$390000$O0KQrF4HOoD4W5V4DDvN0K$fFaIsynaDaladsI+d0uJNzpXZ2nbiyGog8wCmdrRjLQ=', NULL, 0, 'manager', 'John ', 'Wick', '', 0, 1, '2023-03-03 13:43:21.000000');
-INSERT INTO `auth_user` VALUES (3, 'pbkdf2_sha256$390000$9hx0sEPWPWJaJZBCe5AaV2$khxBGaSEbnLK8OEhh3XZxa3bil3JFuL1a7GA86g8aYM=', NULL, 0, 'closer', 'David', 'chardrichescol@gmail.com', 'chardrichescol@gmail.com', 0, 1, '2023-03-03 13:43:45.000000');
+INSERT INTO `auth_user` VALUES (3, 'pbkdf2_sha256$390000$9hx0sEPWPWJaJZBCe5AaV2$khxBGaSEbnLK8OEhh3XZxa3bil3JFuL1a7GA86g8aYM=', NULL, 0, 'closer', 'David', 'Thompson', 'chardrichescol@gmail.com', 0, 1, '2023-03-03 13:43:45.000000');
 INSERT INTO `auth_user` VALUES (4, 'pbkdf2_sha256$390000$nnJQn7zVjqdXVRtdPluY00$q5kd2BQzFdOeaXqwdN2arAEua4VN94r+1XKm5JkhaEk=', NULL, 0, 'contractor', 'Klay', 'Thompson', '', 0, 1, '2023-03-03 13:44:33.000000');
-INSERT INTO `auth_user` VALUES (5, 'pbkdf2_sha256$390000$lSRBW1MVCTJQ62cVJSqgr8$LyXnlwLpzA4dvAprgxJ6+3PNIqOSI7teTbpcGqv5IDw=', '2023-03-10 22:00:08.338556', 0, 'setter', 'Jordan ', 'chardrichescol@gmail.com', 'chardrichescol@gmail.com', 0, 1, '2023-03-03 13:45:57.000000');
+INSERT INTO `auth_user` VALUES (5, 'pbkdf2_sha256$390000$lSRBW1MVCTJQ62cVJSqgr8$LyXnlwLpzA4dvAprgxJ6+3PNIqOSI7teTbpcGqv5IDw=', '2023-03-10 22:00:08.338556', 0, 'setter', 'Jordan ', 'Poole', 'chardrichescol@gmail.com', 0, 1, '2023-03-03 13:45:57.000000');
 INSERT INTO `auth_user` VALUES (6, 'pbkdf2_sha256$390000$tpBwrq2QIErkqmWDIz0izB$DOqdIHwoOT+svnrYPVHxpqTfgwGim2V6mBjMmDsm0ko=', NULL, 0, 'permit_specialist', 'Stephen', 'Curry', '', 0, 1, '2023-03-03 13:46:20.000000');
 INSERT INTO `auth_user` VALUES (7, 'pbkdf2_sha256$390000$NAnLvDs5sW5XXfHo8opSUI$tK1zVOTpMXDnK+nNjugLxRppcYcgDnnt2CUqhYuNcXU=', '2023-03-10 22:19:26.000000', 0, 'spencer', 'Spencer', '', 'admin@gmail.com', 0, 1, '2023-03-10 21:18:32.000000');
 INSERT INTO `auth_user` VALUES (8, 'pbkdf2_sha256$390000$F3HhOrhgEqOX4UtbXKeBiX$9WD1ZLJCpQxgdb2ZRNJ1mGuPn8c+JLJ21KRC2zhS9uA=', NULL, 0, 'ca', 'Third', 'Admin', 'admin3@gmail.com', 0, 1, '2023-03-10 21:23:35.000000');
@@ -182,7 +186,7 @@ CREATE TABLE `auth_user_groups`  (
   INDEX `auth_user_groups_group_id_97559544_fk_auth_group_id`(`group_id`) USING BTREE,
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of auth_user_groups
@@ -251,10 +255,30 @@ INSERT INTO `customers_customeractivitylogs` VALUES ('43001f2b25174c2c97ab4d5394
 INSERT INTO `customers_customeractivitylogs` VALUES ('65fc623f6d1f42c58437fb41e53d756a', '2023-03-10 17:46:47.112880', 'Previous Company', 'a', 'aasd', 1, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
 INSERT INTO `customers_customeractivitylogs` VALUES ('6e25a5ae3a254f32a27c139aea0dc16a', '2023-03-10 22:34:47.481677', 'Equipment Ordered', '', 'NO', 7, '12d35192a11b4ac5b8c3f4f7c842615e', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('b067e6e142a147b188828b3e387c2d59', '2023-03-10 22:34:49.045672', 'Install Complete', '', 'No', 7, '815aa8fcbd064093a5f59614e0d334b7', '');
+INSERT INTO `customers_customeractivitylogs` VALUES ('c3cbbf6cde54481babe1b24b185e07e2', '2023-03-12 18:54:30.742518', 'Previous Company', 'aasd', 'aasds', 1, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
 INSERT INTO `customers_customeractivitylogs` VALUES ('cf8e1d6f0d31432ca4eaac04d68bde71', '2023-03-10 22:34:46.821466', 'Install Complete', '', 'No', 7, '12d35192a11b4ac5b8c3f4f7c842615e', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('d59c6c4598b14aa4ae8a1e361fc0b7fb', '2023-03-10 22:34:48.393535', 'Equipment Ordered', '', 'NO', 7, '815aa8fcbd064093a5f59614e0d334b7', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('e4d921b1be7f45bf9f5839296c9609cc', '2023-03-09 15:08:53.713155', 'Commission Percentage', 'asd', '5', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'number');
 INSERT INTO `customers_customeractivitylogs` VALUES ('ec9f7aaad73b410f897e775854c5ae8d', '2023-03-10 22:19:17.844982', 'SS', 'a', 'ax', 1, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
+
+-- ----------------------------
+-- Table structure for customers_customergroups
+-- ----------------------------
+DROP TABLE IF EXISTS `customers_customergroups`;
+CREATE TABLE `customers_customergroups`  (
+  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `date_created` datetime(6) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `created_by_id` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `customers_customergroups_created_by_id_ce6b5435_fk_auth_user_id`(`created_by_id`) USING BTREE,
+  CONSTRAINT `customers_customergroups_created_by_id_ce6b5435_fk_auth_user_id` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of customers_customergroups
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for customers_customers
@@ -311,6 +335,7 @@ CREATE TABLE `customers_customers`  (
   `permit_specialist_id` int NULL DEFAULT NULL,
   `sold_with_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `bank_funded` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `group_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customers_customers_created_by_id_bcaace5c_fk_auth_user_id`(`created_by_id`) USING BTREE,
   INDEX `customers_customers_closer_id_dfcbc787_fk_auth_user_id`(`closer_id`) USING BTREE,
@@ -329,12 +354,14 @@ CREATE TABLE `customers_customers`  (
   INDEX `customers_customers_pe_stamp_requested_id_c1272941`(`pe_stamp_requested_id`) USING BTREE,
   INDEX `customers_customers_permit_approved_id_ed49cb9f`(`permit_approved_id`) USING BTREE,
   INDEX `customers_customers_permit_submitted_id_d45cb475`(`permit_submitted_id`) USING BTREE,
+  INDEX `customers_customers_group_id_ba27131b_fk_customers`(`group_id`) USING BTREE,
   CONSTRAINT `customers_customers_battery_id_0034ac66_fk_customers` FOREIGN KEY (`battery_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_closer_id_dfcbc787_fk_auth_user_id` FOREIGN KEY (`closer_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_contractor_id_97e2d73b_fk_auth_user_id` FOREIGN KEY (`contractor_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_created_by_id_bcaace5c_fk_auth_user_id` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_design_requested_id_43cb051d_fk_customers` FOREIGN KEY (`design_requested_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_equipment_ordered_id_a3ecade3_fk_customers` FOREIGN KEY (`equipment_ordered_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_group_id_ba27131b_fk_customers` FOREIGN KEY (`group_id`) REFERENCES `customers_customergroups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_ic_approved_id_2e9b2057_fk_customers` FOREIGN KEY (`ic_approved_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_ic_submitted_id_cefa8266_fk_customers` FOREIGN KEY (`ic_submitted_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_install_complete_id_f723b98d_fk_customers` FOREIGN KEY (`install_complete_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -351,9 +378,10 @@ CREATE TABLE `customers_customers`  (
 -- ----------------------------
 -- Records of customers_customers
 -- ----------------------------
-INSERT INTO `customers_customers` VALUES ('12d35192a11b4ac5b8c3f4f7c842615e', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chadescol321@gmail.com', '6efd20ca11b24097b76dff531afedce9', '', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', NULL, NULL, NULL, '', 'Hudson Kirt', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'aasd', '', 'axc', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:22:01.541603', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'be0872f8da4e47ad8e71641b6710570c', NULL);
-INSERT INTO `customers_customers` VALUES ('815aa8fcbd064093a5f59614e0d334b7', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', '6efd20ca11b24097b76dff531afedce9', '', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', NULL, NULL, NULL, '', 'Chad Escol', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'zxc', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:23:43.364755', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `customers_customers` VALUES ('b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'asdasd', '684 Osborne St', 'asdasknd', 'asdsad', 'zxczxczxc', '5640ff049e39452d99d29bb887455a84', '5', 'a', '060360e587494499b69762b51af0fb14', '2023-03-03', 'johnwick@gmail.com', '16feb1e4233749ccbf0c6f9fed464ad0', 'Finance Company', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', '2023-03-15', '9750859c8dd14eaeb5f2516acd9c829f', '9634692781424543a303fd381954df7e', '6kw', 'John Wick', '25', 'asd', 'asd', 'asd', '6691f8b9bd3346a5b59d4e65829ae6d6', '48a49920152747a59b3898955c9c6c6e', 'asodjasd', '12345', 'cdc06d68f0f648579589d2942c83c5de', '14314413555', 'Test Companys', '124000', 'Stay Strong', 'Utah', 'asdasd', 'asd', 'sample only', '2023-03-03', 1, '2023-03-05 12:55:51.186570', 1, 5, 2, 3, 'qweqwe', 4, 6, 'be0872f8da4e47ad8e71641b6710570c', '234234');
+INSERT INTO `customers_customers` VALUES ('12d35192a11b4ac5b8c3f4f7c842615e', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chadescol321@gmail.com', '6efd20ca11b24097b76dff531afedce9', '', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', NULL, NULL, NULL, '', 'Hudson Kirt', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'aasds', '', 'axc', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:22:01.541603', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'be0872f8da4e47ad8e71641b6710570c', NULL, NULL);
+INSERT INTO `customers_customers` VALUES ('814c236ba5a949058e7bd5899655fb0f', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'John Watsons', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-12 21:22:40.395505', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `customers_customers` VALUES ('815aa8fcbd064093a5f59614e0d334b7', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', '6efd20ca11b24097b76dff531afedce9', '', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', NULL, NULL, NULL, '', 'Chad Escol', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'zxc', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:23:43.364755', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `customers_customers` VALUES ('b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'asdasd', '684 Osborne St', 'asdasknd', 'asdsad', 'zxczxczxc', '5640ff049e39452d99d29bb887455a84', '5', 'a', '060360e587494499b69762b51af0fb14', '2023-03-03', 'johnwick@gmail.com', '16feb1e4233749ccbf0c6f9fed464ad0', 'Finance Company', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', '2023-03-15', '9750859c8dd14eaeb5f2516acd9c829f', '9634692781424543a303fd381954df7e', '6kw', 'John Wick', '25', 'asd', 'asd', 'asd', '6691f8b9bd3346a5b59d4e65829ae6d6', '48a49920152747a59b3898955c9c6c6e', 'asodjasd', '12345', 'cdc06d68f0f648579589d2942c83c5de', '14314413555', 'Test Companys', '124000', 'Stay Strong', 'Utah', 'asdasd', 'asd', 'sample only', '2023-03-03', 1, '2023-03-05 12:55:51.186570', 1, 5, 2, 3, 'qweqwe', 4, 6, 'be0872f8da4e47ad8e71641b6710570c', '234234', NULL);
 
 -- ----------------------------
 -- Table structure for customers_customersattachments
@@ -452,6 +480,7 @@ CREATE TABLE `customers_customerspeople`  (
 -- ----------------------------
 INSERT INTO `customers_customerspeople` VALUES ('003432776ed4431fa95d49ba1b3dd9a5', '2023-03-05 12:55:51.193629', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 1);
 INSERT INTO `customers_customerspeople` VALUES ('1c15723da9e2414c872c326e3153c198', '2023-03-05 12:55:51.192628', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 5);
+INSERT INTO `customers_customerspeople` VALUES ('5b059cdd964343fa9ffcc1d40afae3ca', '2023-03-12 21:22:40.396503', 1, '814c236ba5a949058e7bd5899655fb0f', 1);
 INSERT INTO `customers_customerspeople` VALUES ('5c71c28553124d93aaa0f74de8782ed4', '2023-03-05 12:55:51.190574', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 2);
 INSERT INTO `customers_customerspeople` VALUES ('873d631604164ece888583c20c4865e6', '2023-03-05 12:55:51.192628', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 6);
 INSERT INTO `customers_customerspeople` VALUES ('b550557dc8564b5b8dcbe40500c74f1e', '2023-03-05 12:55:51.192628', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 4);
@@ -476,7 +505,7 @@ CREATE TABLE `django_admin_log`  (
   INDEX `django_admin_log_user_id_c564eba6_fk_auth_user_id`(`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -519,7 +548,7 @@ CREATE TABLE `django_content_type`  (
   `model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label`, `model`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -532,6 +561,7 @@ INSERT INTO `django_content_type` VALUES (7, 'backend', 'clients');
 INSERT INTO `django_content_type` VALUES (8, 'backend', 'customers');
 INSERT INTO `django_content_type` VALUES (5, 'contenttypes', 'contenttype');
 INSERT INTO `django_content_type` VALUES (13, 'customers', 'customeractivitylogs');
+INSERT INTO `django_content_type` VALUES (14, 'customers', 'customergroups');
 INSERT INTO `django_content_type` VALUES (9, 'customers', 'customers');
 INSERT INTO `django_content_type` VALUES (10, 'customers', 'customersattachments');
 INSERT INTO `django_content_type` VALUES (12, 'customers', 'customerselectoptions');
@@ -548,7 +578,7 @@ CREATE TABLE `django_migrations`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -603,6 +633,7 @@ INSERT INTO `django_migrations` VALUES (47, 'customers', '0027_customeractivityl
 INSERT INTO `django_migrations` VALUES (48, 'customers', '0028_customeractivitylogs_field_type', '2023-03-09 14:40:44.636359');
 INSERT INTO `django_migrations` VALUES (49, 'customers', '0029_alter_customers_approved_permit', '2023-03-09 15:23:17.443727');
 INSERT INTO `django_migrations` VALUES (50, 'customers', '0030_remove_customers_approved_permit_and_more', '2023-03-09 15:26:09.505196');
+INSERT INTO `django_migrations` VALUES (51, 'customers', '0031_alter_customers_battery_and_more', '2023-03-12 18:53:07.729316');
 
 -- ----------------------------
 -- Table structure for django_session
@@ -625,6 +656,7 @@ INSERT INTO `django_session` VALUES ('73fejej24ffaaki971to982cuqpulxsl', '.eJxVj
 INSERT INTO `django_session` VALUES ('7jg5sjo1lu83awz07aorfek6jn51v0ki', '.eJxVjDsOwjAQBe_iGllefxElPWew1rs2DiBbipMq4u4QKQW0b2beJiKuS43ryHOcWFwEiNPvlpCeue2AH9juXVJvyzwluSvyoEPeOufX9XD_DiqO-q21YlQOqGTQxgW0zhDaAAZC0T5Yzsk5MhjIeSDUyFZRAc7WpLPxSbw_1Ws32w:1padpu:3_35zLa8JJV72PCjjfm4NgI9mCN8Xu0d1AoF7yfkXxo', '2023-03-24 22:35:10.819393');
 INSERT INTO `django_session` VALUES ('dlwz1yn5flegf1lckdhmdckvah7qx58t', '.eJxVjDEOgzAMRe-SuYoIiR3o2J0zIBs7DW0FEoGp6t2rSAzt-t97_21GOvY8HkW3cRZzNWAuvxvT9NSlAnnQcl_ttC77NrOtij1pscMq-rqd7t9BppJr7ZIIckgUJaIHTQ0Aiifn2oDcao-pc-SJQhRglRD7Dj1Dz14bBPP5Avu9OA4:1padI0:V42RGObznC8XIiZyHI2XB_pGrk_kALOdlo0dN-ss6Ng', '2023-03-24 22:00:08.341554');
 INSERT INTO `django_session` VALUES ('ex4uk0ykc7elangg2xfecrkc6eh8mfhe', '.eJxVjDsOwjAQBe_iGllefxElPWew1rs2DiBbipMq4u4QKQW0b2beJiKuS43ryHOcWFwEiNPvlpCeue2AH9juXVJvyzwluSvyoEPeOufX9XD_DiqO-q21YlQOqGTQxgW0zhDaAAZC0T5Yzsk5MhjIeSDUyFZRAc7WpLPxSbw_1Ws32w:1pXLAr:4KbckRTYXsuSkinKcO7WinCkDg5zu0oagnHpPZhwqQw', '2023-03-15 20:03:09.616261');
+INSERT INTO `django_session` VALUES ('h2yc6yc2o60o1gw80piktv8kvpi9hllj', '.eJxVjDsOwjAQBe_iGllefxElPWew1rs2DiBbipMq4u4QKQW0b2beJiKuS43ryHOcWFwEiNPvlpCeue2AH9juXVJvyzwluSvyoEPeOufX9XD_DiqO-q21YlQOqGTQxgW0zhDaAAZC0T5Yzsk5MhjIeSDUyFZRAc7WpLPxSbw_1Ws32w:1pbJAe:lM4a34ZtygFB0U_mq381RKVYGHvpTpz3GkFetO_nYHo', '2023-03-26 18:43:20.403048');
 INSERT INTO `django_session` VALUES ('m6rtxnuow5af6s4twgou924nqcv1rqf6', '.eJxVjDsOwjAQBe_iGllefxElPWew1rs2DiBbipMq4u4QKQW0b2beJiKuS43ryHOcWFwEiNPvlpCeue2AH9juXVJvyzwluSvyoEPeOufX9XD_DiqO-q21YlQOqGTQxgW0zhDaAAZC0T5Yzsk5MhjIeSDUyFZRAc7WpLPxSbw_1Ws32w:1pXDuX:_ZPjaHxnN9c0VzHU1UToWuPg-9_4dLDH6AHUZGwFn5I', '2023-03-15 12:17:49.674017');
 INSERT INTO `django_session` VALUES ('p2ti23m5nwqzuw2853cbdppgglize7ak', '.eJxVjDsOwjAQBe_iGllefxElPWew1rs2DiBbipMq4u4QKQW0b2beJiKuS43ryHOcWFwEiNPvlpCeue2AH9juXVJvyzwluSvyoEPeOufX9XD_DiqO-q21YlQOqGTQxgW0zhDaAAZC0T5Yzsk5MhjIeSDUyFZRAc7WpLPxSbw_1Ws32w:1pWomQ:1xscPFQcjEqsruJu1sog2WLgvYtGi5dUHKKWHxt-280', '2023-03-14 09:27:46.545639');
 INSERT INTO `django_session` VALUES ('yiub1sgh7fqc24b7mu8m8jp3omwnogqv', '.eJxVjDsOwjAQBe_iGllefxElPWew1rs2DiBbipMq4u4QKQW0b2beJiKuS43ryHOcWFwEiNPvlpCeue2AH9juXVJvyzwluSvyoEPeOufX9XD_DiqO-q21YlQOqGTQxgW0zhDaAAZC0T5Yzsk5MhjIeSDUyFZRAc7WpLPxSbw_1Ws32w:1paYDo:EDVpWd63oBENNbeOOl5EBSmuQboJ0qigsGp_Fg9T9uQ', '2023-03-24 16:35:28.460612');

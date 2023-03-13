@@ -1,0 +1,382 @@
+<!--begin::Modal content-->
+{% load static %}
+{% load tags %}
+{% users request as users %}
+{% managers request as managers %}
+{% closers request as closers %}
+{% contractors request as contractors %}
+{% permit_specialists request as permit_specialists %}
+{% colors as colors %}
+<div class="modal-content">
+   <!--begin::Form-->
+   <form class="form" id="addCustomerForm" enctype="multipart/form-data">
+      <!--begin::Modal header-->
+      {% csrf_token %}
+      <div class="modal-header" id="kt_modal_add_customer_header">
+         <!--begin::Modal title-->
+         <h2 class="fw-bold">Add a Customer</h2>
+         <!--end::Modal title-->
+         <!--begin::Close-->
+         <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+            <span class="svg-icon svg-icon-1">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+               </svg>
+            </span>
+            <!--end::Svg Icon-->
+         </div>
+         <!--end::Close-->
+      </div>
+      <!--end::Modal header-->
+      <!--begin::Modal body-->
+      <div class="modal-body py-10 px-lg-17">
+         <!--begin::Scroll-->
+         <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+               <!--begin::Label-->
+               <label class="required fs-6 fw-semibold mb-2">Name</label>
+               <!--end::Label-->
+               <!--begin::Input-->
+               <input type="text" class="form-control form-control-solid" placeholder="John Doe" name="name" required/>
+               <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+               <!--begin::Label-->
+               <label class="fs-6 fw-semibold mb-2">
+               <span class="required">Email</span>
+               <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Email address must be active"></i>
+               </label>
+               <!--end::Label-->
+               <!--begin::Input-->
+               <input type="email" class="form-control form-control-solid" placeholder="john.doe@gmail.com" name="email" required/>
+               <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+               <!--begin::Label-->
+               <label class="required fs-6 fw-semibold mb-2">Phone</label>
+               <!--end::Label-->
+               <!--begin::Input-->
+               <input type="text" class="form-control form-control-solid" placeholder="" name="phone" required/>
+               <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row g-9 mb-7">
+               <!--begin::Col-->
+               <div class="col-md-6 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-6 fw-semibold mb-2">Address</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="address" required/>
+                  <!--end::Input-->
+               </div>
+               <!--end::Col-->
+               <!--begin::Col-->
+               <div class="col-md-6 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-6 fw-semibold mb-2">State / Province</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="state" required/>
+                  <!--end::Input-->
+               </div>
+               <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Billing toggle-->
+            <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#other_information" role="button" aria-expanded="false" aria-controls="kt_customer_view_details">
+               Other Information
+               <span class="ms-2 rotate-180">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                  <span class="svg-icon svg-icon-3">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                     </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+               </span>
+            </div>
+            <!--end::Billing toggle-->
+
+            <!--begin::Billing form-->
+            <div id="other_information" class="collapse show">
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Previous Company</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="previous_company" />
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Sold With</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="sold_with" aria-label="Select a Company" data-control="select2" data-placeholder="Select a Company" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                      <option></option>
+                      {% customer_selection_options 'sold_with' as customer_selection_options %}
+                      {% for row in customer_selection_options %}
+                      <option value="{{ row.id }}">{{ row.name }}</option>
+                     {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">DOB</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="dob" type="date"/>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+               <!--end::Input group-->
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">SS</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="ss" value="" />
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Finance Company</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="finance_company" value="" />
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Number of Panels</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="number_of_panels" value="" />
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Contract Signed Date</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="contract_signed_date" value="" type="date"/>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Battery</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="battery" aria-label="Select a Battery" data-control="select2" data-placeholder="Select a Battery" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                      <option></option>
+                      {% customer_selection_options 'battery' as customer_selection_options %}
+                      {% for row in customer_selection_options %}
+                      <option value="{{ row.id }}">{{ row.name }}</option>
+                     {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">KW</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="kw" type="number"/>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Project Cost</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="project_cost" type="number"/>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Manager</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="manager" aria-label="Select a Manager" data-control="select2" data-placeholder="Select Manager" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                  {% for row in managers %}
+                     <option></option>
+                     <option value="{{ row.id }}" data-kt-select2-img="{% static 'assets/media/avatars/blank.png' %}">{{ row.first_name }} {{ row.last_name }}</option>
+                  {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Setter</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="setter" aria-label="Select a Setter" data-control="select2" data-placeholder="Select Setter" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid form-transparent">
+                  {% for row in closers %}
+                     <option></option>
+                     <option value="{{ row.id }}" data-kt-select2-img="{% static 'assets/media/avatars/blank.png' %}">{{ row.first_name }} {{ row.last_name }}</option>
+                  {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Closer</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="closer" aria-label="Select a Closer" data-control="select2" data-placeholder="Select Closer" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                  {% for row in closers %}
+                     <option></option>
+                     <option value="{{ row.id }}" data-kt-select2-img="{% static 'assets/media/avatars/blank.png' %}">{{ row.first_name }} {{ row.last_name }}</option>
+                  {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Contractor</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="contractor" aria-label="Select a Contractor" data-control="select2" data-placeholder="Select Contractor" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                  {% for row in contractors %}
+                     <option></option>
+                     <option value="{{ row.id }}" data-kt-select2-img="{% static 'assets/media/avatars/blank.png' %}">{{ row.first_name }} {{ row.last_name }}</option>
+                  {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Permit Specialist</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="permit_specialist" aria-label="Select a Permit Specialist" data-control="select2" data-placeholder="Select Permit Specialist" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid">
+                  {% for row in permit_specialists %}
+                     <option></option>
+                     <option value="{{ row.id }}" data-kt-select2-img="{% static 'assets/media/avatars/blank.png' %}">{{ row.first_name }} {{ row.last_name }}</option>
+                  {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+               <!--begin::Input group-->
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">People</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="people" aria-label="Select Peoples" data-control="select2" data-placeholder="Add People" data-dropdown-parent="#addCustomerModal" class="form-select form-select-sm form-select-solid" multiple>
+                  {% for row in users %}
+                     <option></option>
+                     <option value="{{ row.id }}" data-kt-select2-img="{% static 'assets/media/avatars/blank.png' %}">{{ row.first_name }} {{ row.last_name }}</option>
+                  {% endfor %}
+                  </select>
+                  <!--end::Input-->
+               </div>
+               <!--end::Input group-->
+
+            </div>
+            <br>
+            <!--begin::Billing toggle-->
+            <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#attachments" role="button" aria-expanded="false" aria-controls="kt_customer_view_details">
+               Attachments
+               <span class="ms-2 rotate-180">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                  <span class="svg-icon svg-icon-3">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+                     </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+               </span>
+            </div>
+            <!--end::Billing toggle-->
+
+            <div id="attachments" class="collapse">
+
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Front of House</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="front_of_house" type="file" accept="application/pdf"/>
+                  <!--end::Input-->
+               </div>
+
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">Panel Layout</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input class="form-control form-control-solid" placeholder="" name="panel_layout" type="file" accept="application/pdf"/>
+                  <!--end::Input-->
+               </div>
+
+            </div>
+         </div>
+         <!--end::Scroll-->
+      </div>
+      <!--end::Modal body-->
+      <!--begin::Modal footer-->
+      <div class="modal-footer flex-center">
+         <!--begin::Button-->
+         <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">Discard</button>
+         <!--end::Button-->
+         <!--begin::Button-->
+         <button type="submit" id="addCustomerSubmitBtn" class="btn btn-primary">
+         <span class="indicator-label">Submit</span>
+         <span class="indicator-progress">Please wait...
+         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+         </button>
+         <!--end::Button-->
+      </div>
+      <!--end::Modal footer-->
+   </form>
+   <!--end::Form-->
+</div>

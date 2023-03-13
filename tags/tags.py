@@ -49,3 +49,8 @@ def customer_selection_options(field_name):
 @register.simple_tag
 def datetime_now():
     return datetime.now()
+
+
+@register.simple_tag
+def groups():
+    return CustomerGroups.objects.filter(is_active=True).all()
