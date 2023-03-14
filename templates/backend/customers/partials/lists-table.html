@@ -6,8 +6,31 @@
 {% contractors request as contractors %}
 {% permit_specialists request as permit_specialists %}
 {% colors as colors %}
+{% groups as groups %}
 {% for row in data %}
 <tr>
+   <td>
+      <a class="btn btn-sm btn-bg-{{ row.ic_submitted.color }} text-inverse-{{ row.ic_submitted.color }} w-150px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.group.name }}
+         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+         <span class="svg-icon svg-icon-5 m-0">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+             </svg>
+         </span>
+         <!--end::Svg Icon-->
+      </a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+            {% for i in groups %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="selectGroup('{{ row.id }}', '{{ i.id }}')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" data-bs-toggle="modal" data-bs-target="#addGroupModal">ADD GROUP</a>
+            </div>
+      </div>
+   </td>
    <td>
       <input type="hidden" name="id_customer" value="{{ row.id }}">
       <a onClick="viewUpdatesBtn('{{ row.id }}');" class="cursor-pointer text-gray-800 text-hover-primary mb-1" title="View Updates">{{ row.name }}</a>
@@ -38,9 +61,12 @@
          {% customer_selection_options 'sold_with' as customer_selection_options %}
             {% for i in customer_selection_options %}
              <div class="menu-item px-3">
-                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection  ')">{{ i.name|upper}}</a>
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
              </div>
             {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('sold_with')">ADD OPTION</a>
+            </div>
       </div>
       <!--end::Menu-->
       <!--
@@ -90,6 +116,27 @@
       </div>
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.sold_with.color }} text-inverse-{{ row.sold_with.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.design_requested.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'design_requested' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('design_requested')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -104,8 +151,30 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.pe_stamp_requested.color }} text-inverse-{{ row.pe_stamp_requested.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.pe_stamp_requested.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'pe_stamp_requested' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('pe_stamp_requested')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_pe_stamp_requested" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -120,10 +189,32 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    {% endif %}
    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.permit_submitted.color }} text-inverse-{{ row.permit_submitted.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.permit_submitted.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'permit_submitted' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('permit_submitted')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -138,8 +229,30 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.permit_approved.color }} text-inverse-{{ row.permit_approved.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.permit_approved.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'permit_approved' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('permit_approved')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_permit_approved" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -154,10 +267,32 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    {% endif %}
    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.ic_submitted.color }} text-inverse-{{ row.ic_submitted.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.ic_submitted.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'ic_submitted' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('ic_submitted')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -172,8 +307,30 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.ic_approved.color }} text-inverse-{{ row.ic_approved.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.ic_approved.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'ic_approved' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('ic_approved')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_ic_approved" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -188,6 +345,7 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
       <div class="input-group input-group-sm">
@@ -195,6 +353,27 @@
       </div>
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.install_confirmed.color }} text-inverse-{{ row.install_confirmed.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.install_confirmed.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'install_confirmed' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('install_confirmed')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_install_confirmed" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -209,8 +388,30 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.install_complete.color }} text-inverse-{{ row.install_complete.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.install_complete.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'install_complete' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('install_complete')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_install_complete" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -225,8 +426,30 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.equipment_ordered.color }} text-inverse-{{ row.equipment_ordered.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.equipment_ordered.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'equipment_ordered' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('equipment_ordered')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_equipment_ordered" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -241,6 +464,7 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    {% endif %}
    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
@@ -329,6 +553,27 @@
    {% endif %}
    {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
    <td>
+      <a class="btn btn-sm btn-bg-{{ row.battery.color }} text-inverse-{{ row.battery.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.battery.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'battery' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+            <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-secondary text-inverse-secondary cursor-pointer" onClick="addOption('battery')">ADD OPTION</a>
+            </div>
+      </div>
+      <!--
       <div class="input-group input-group-sm">
          <select name="td_battery" class="form-select form-select-sm form-select-solid">
             <option></option>
@@ -343,6 +588,7 @@
             <option value="Add">Add Option</option>
          </select>
       </div>
+      -->
    </td>
    <td>
       <div class="input-group input-group-sm">
@@ -439,61 +685,6 @@
 <script src="{% static 'assets/plugins/global/plugins.bundle.js' %}"></script>
 <script src="{% static 'assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
 <script>
-   const selectOption = (pk, field_name) => {
-      $('#selectOptionModalBody').empty().load(`/customers/select-option/${pk}/${field_name}/`);
-      $('#selectOptionModal').modal('toggle');
-   }
-
-   const saveUpdate = (customer_id, field, input_value, field_type) => {
-           $.ajax({
-                type: 'POST',
-                url: '/customers/update/',
-                data: {'id': customer_id, 'field': field, 'value': input_value, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(), 'field_type': field_type},
-                success: (result) => {
-                    const statusMsg = result['statusMsg'];
-                    toastr.options = {
-                        closeButton: false,
-                        debug: false,
-                        newestOnTop: false,
-                        progressBar: false,
-                        positionClass: "toastr-top-right",
-                        preventDuplicates: false,
-                        onclick: null,
-                        showDuration: "300",
-                        hideDuration: "1000",
-                        timeOut: "5000",
-                        extendedTimeOut: "1000",
-                        showEasing: "swing",
-                        hideEasing: "linear",
-                        showMethod: "fadeIn",
-                        hideMethod: "fadeOut",
-                    };
-                    toastr.success(`${statusMsg} Updated`);
-                },
-                error: (result) => {
-                    const statusMsg = result['responseJSON']['statusMsg'];
-                    toastr.options = {
-                        closeButton: false,
-                        debug: false,
-                        newestOnTop: false,
-                        progressBar: false,
-                        positionClass: "toastr-top-right",
-                        preventDuplicates: false,
-                        onclick: null,
-                        showDuration: "300",
-                        hideDuration: "1000",
-                        timeOut: "5000",
-                        extendedTimeOut: "1000",
-                        showEasing: "swing",
-                        hideEasing: "linear",
-                        showMethod: "fadeIn",
-                        hideMethod: "fadeOut",
-                    };
-                    toastr.error(`${statusMsg}`);
-                }
-           });
-       }
-
    $(document).ready(function(){
        $("#customers-table tbody select[name=td_sold_with]").change(function (ev) {
            const current_row = $(this).closest("tr");
@@ -802,12 +993,6 @@
            }
        });
 
-
-       const addOption = (field_option_name) => {
-           $('input[name=field_option_name]').val(field_option_name)
-           $('#addOptionModal').modal('toggle');
-       }
-
        // Format options
        var optionFormat = function(item) {
           if ( !item.id ) {
@@ -844,6 +1029,7 @@
           templateSelection: optionFormat,
           templateResult: optionFormat
        });
+
    });
 </script>
 {% endblock %}

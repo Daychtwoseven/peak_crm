@@ -14,5 +14,6 @@ urlpatterns = [
     path('add-group/', add_group_page, name='backend-add-group-index-page'),
     path('groups/', groups_index_page, name='backend-groups-index-page'),
 
-    path('select-option/<slug:pk>/<slug:field_name>/', select_option_page, name='backend-select-option-page')
+    path('select-option/<slug:pk>/<slug:field_name>/', select_option_page, name='backend-select-option-page'),
+    path('select-group/', select_group_page, name='backend-select-group-page')
 ]

@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 14/03/2023 09:42:40
+ Date: 14/03/2023 10:36:53
 */
 
 SET NAMES utf8mb4;
@@ -254,14 +254,23 @@ INSERT INTO `customers_customeractivitylogs` VALUES ('16db50ea4b0f4d64b7165fdaa6
 INSERT INTO `customers_customeractivitylogs` VALUES ('17fab0294fb64a7cb54d3ece7f0ae243', '2023-03-10 22:34:49.677622', 'Install Confirmed', '', 'Yes', 7, '815aa8fcbd064093a5f59614e0d334b7', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('1c2d448973b245cda6fc77e1647dd818', '2023-03-14 08:35:41.645454', 'Sold With', '', 'yes', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('21210605673b43548fc5320a0dd85f3d', '2023-03-10 22:19:34.985363', 'SS', 'ax', 'axc', 7, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
+INSERT INTO `customers_customeractivitylogs` VALUES ('2205b761e2624921b58ffe88c2a6f16f', '2023-03-14 09:52:21.144580', 'Sold With', 'yes', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('221e1a038a5c435cbcd1f4ca74e0a12c', '2023-03-14 09:57:31.098701', 'Sold With', 'YES', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('253f3a89b87d4e0ba8a71c20ef09509d', '2023-03-14 09:52:00.937449', 'Sold With', 'ZXC', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('2b3b7fa39a0d43fbb194f5b0cfd32f8e', '2023-03-14 07:59:04.177217', 'Sold With', 'TEST', 'yes', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('2fae2808901c432aae6a771ee78ebc8d', '2023-03-14 00:45:26.558193', 'Sold With', 'yes', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('342c3313f42a4b6b92cde5630c2a07a8', '2023-03-14 09:52:02.498489', 'Sold With', 'Company 2', 'ZXC', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('43001f2b25174c2c97ab4d539482dbd3', '2023-03-10 22:34:46.006042', 'Install Confirmed', '', 'Yes', 7, '12d35192a11b4ac5b8c3f4f7c842615e', '');
+INSERT INTO `customers_customeractivitylogs` VALUES ('4315d479092d4bc8ac50574ed62bd588', '2023-03-14 09:51:31.885873', 'Sold With', 'Company 2', 'ZXC', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('4ab6b44b02f44004b18b65409bf367d9', '2023-03-14 00:49:59.270395', 'Sold With', 'ZXC', 'yes', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('50d3cfe936b54bcbae43b567b929396b', '2023-03-14 00:49:47.380608', 'Sold With', 'Company 2', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('605143b0bd4a41bf8950296cdf3cd5fb', '2023-03-14 07:59:01.814256', 'Sold With', 'Company 2', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('60e696781be84e3a8b04c77f3f593190', '2023-03-14 10:36:30.455871', 'Sold With', 'Yes', 'No', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('6351f6bccab140f496926a82b83feb15', '2023-03-14 09:57:26.620687', 'Permit Submitted', '', 'No', 1, '815aa8fcbd064093a5f59614e0d334b7', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('65fc623f6d1f42c58437fb41e53d756a', '2023-03-10 17:46:47.112880', 'Previous Company', 'a', 'aasd', 1, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
+INSERT INTO `customers_customeractivitylogs` VALUES ('6681db68bfe240689d81c9c2a2499011', '2023-03-14 09:51:23.681075', 'Sold With', 'YES', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('6e25a5ae3a254f32a27c139aea0dc16a', '2023-03-10 22:34:47.481677', 'Equipment Ordered', '', 'NO', 7, '12d35192a11b4ac5b8c3f4f7c842615e', '');
+INSERT INTO `customers_customeractivitylogs` VALUES ('723ee65a8f194e6b8884fe2b3299b4dd', '2023-03-14 09:52:05.143376', 'Sold With', 'TEST', 'yes', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('732d7755ebd8409c8648c74c5d0a24cf', '2023-03-14 08:34:15.510661', 'Design Requested', 'Yes', 'No', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('7993d71aa39a4bfebce7d059efa70003', '2023-03-14 00:43:21.856683', 'Sold With', 'yes', 'ZXC', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('8209007a9f4044e085bdf63e5b17f704', '2023-03-14 07:59:05.101206', 'Sold With', 'yes', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
@@ -272,6 +281,7 @@ INSERT INTO `customers_customeractivitylogs` VALUES ('8ad90dfce63844afb15ddf3518
 INSERT INTO `customers_customeractivitylogs` VALUES ('8c4e7f6f17244c3f88c4ad62d96b4680', '2023-03-14 00:42:12.924063', 'Sold With', '', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('991e734ca97c4293b7f9dcc3c1d81b63', '2023-03-14 00:49:51.273052', 'Sold With', 'SAMPLE COMPANY', 'ZXC', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('9aa246770e764d0086c3080c5d910954', '2023-03-14 00:44:30.852614', 'Sold With', 'YES', 'yes', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('9ca5ca50282242b08d794876b2cac990', '2023-03-14 09:59:17.991119', 'PE Stamp Requested', 'Yes', 'Yes', 1, '815aa8fcbd064093a5f59614e0d334b7', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('a30249f41f3c406894988fdfbc2f7ea0', '2023-03-13 22:37:54.722575', 'Design Requested', '', 'Yes', 1, '12d35192a11b4ac5b8c3f4f7c842615e', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('ae4547a2712d462a98442d81d1aebfd2', '2023-03-14 07:58:52.494733', 'Sold With', 'YES', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('ae5347b0d6c74df4a3fe4c281fddcd00', '2023-03-14 07:59:00.782057', 'Sold With', 'yes', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
@@ -284,11 +294,16 @@ INSERT INTO `customers_customeractivitylogs` VALUES ('b51b2915fbcd422ab02ef19fb5
 INSERT INTO `customers_customeractivitylogs` VALUES ('b69844dbd70947199003ec39fff941df', '2023-03-14 00:44:26.582541', 'Sold With', 'ZXC', 'SAMPLE COMPANY', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('ba245ce8b5d54a819e73b59c3f794fbb', '2023-03-14 00:47:17.977080', 'Sold With', 'TEST', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('bacf969f8d824c2fb781aa7412bda4ef', '2023-03-13 22:44:00.299988', 'Commission Percentage', '5', '50', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'number');
+INSERT INTO `customers_customeractivitylogs` VALUES ('bd1c4de832df4963a8b61f932a82bb04', '2023-03-14 10:36:34.490946', 'Sold With', 'Yes', 'No', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('bf4948f1d3574b99a83e261b2f9cb360', '2023-03-14 10:35:25.661787', 'Sold With', '', 'Yes', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('c3cbbf6cde54481babe1b24b185e07e2', '2023-03-12 18:54:30.742518', 'Previous Company', 'aasd', 'aasds', 1, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
 INSERT INTO `customers_customeractivitylogs` VALUES ('c41fafda27794816847a534ec55d26d5', '2023-03-14 00:47:07.180170', 'Sold With', 'yes', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('c614f4b1f91b4815b8d844b9f1d8e08e', '2023-03-14 10:21:59.433199', 'Sold With', '', 'Yes', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('c78e396ad3c54f3382414f80a5b469af', '2023-03-14 00:45:29.445976', 'Sold With', 'YES', 'SAMPLE COMPANY', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('cebf672aa3c6409aa5d5686caddddb3a', '2023-03-14 09:57:09.686789', 'Sold With', 'Company 2', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('cf8e1d6f0d31432ca4eaac04d68bde71', '2023-03-10 22:34:46.821466', 'Install Complete', '', 'No', 7, '12d35192a11b4ac5b8c3f4f7c842615e', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('d03100ed9ba34af5b74f45ebbc4a87cf', '2023-03-14 00:47:06.077794', 'Sold With', 'Company 2', 'yes', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('d382e89db6d7470bafcd9e8abcc249e6', '2023-03-14 09:51:21.321449', 'Sold With', 'ZXC', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('d59c6c4598b14aa4ae8a1e361fc0b7fb', '2023-03-10 22:34:48.393535', 'Equipment Ordered', '', 'NO', 7, '815aa8fcbd064093a5f59614e0d334b7', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('d5bdfe2e4fe242ba81a50d04f987b962', '2023-03-14 00:50:08.619855', 'Sold With', 'yes', 'YES', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('d814dad8f34f40a4a1c43ac144091fd6', '2023-03-14 00:47:04.992854', 'Sold With', 'TEST', 'Company 2', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
@@ -300,8 +315,12 @@ INSERT INTO `customers_customeractivitylogs` VALUES ('df540c7c29214718bb0ad4e000
 INSERT INTO `customers_customeractivitylogs` VALUES ('e35eb4b68dc9497e8760989aacb75f6f', '2023-03-14 00:45:39.578058', 'Sold With', 'YES', 'SAMPLE COMPANY', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('e4610e401eed477794b7b3d485e33b2c', '2023-03-14 00:48:02.635240', 'Sold With', '', 'YES', 1, '814c236ba5a949058e7bd5899655fb0f', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('e4d921b1be7f45bf9f5839296c9609cc', '2023-03-09 15:08:53.713155', 'Commission Percentage', 'asd', '5', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'number');
+INSERT INTO `customers_customeractivitylogs` VALUES ('e63a57c221804aeca4072c900bef3038', '2023-03-14 10:36:33.431834', 'Sold With', 'No', 'Yes', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('e8204923c6e64c34ba659264e09e87a1', '2023-03-14 09:57:18.228160', 'PE Stamp Requested', '', 'Yes', 1, '815aa8fcbd064093a5f59614e0d334b7', '');
 INSERT INTO `customers_customeractivitylogs` VALUES ('ec6c019b3efb4293b8d6f5a52430c7b3', '2023-03-14 07:59:06.091369', 'Sold With', 'Company 2', 'SAMPLE COMPANY', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('ec9f7aaad73b410f897e775854c5ae8d', '2023-03-10 22:19:17.844982', 'SS', 'a', 'ax', 1, '12d35192a11b4ac5b8c3f4f7c842615e', 'text');
+INSERT INTO `customers_customeractivitylogs` VALUES ('edebb26947eb46aeb5d1ea3864c76014', '2023-03-14 09:52:03.795850', 'Sold With', 'ZXC', 'TEST', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
+INSERT INTO `customers_customeractivitylogs` VALUES ('efd1b244d891490b9503b6045350db28', '2023-03-14 10:08:28.699112', 'Sold With', 'yes', 'Company 2', 1, 'b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'choices');
 INSERT INTO `customers_customeractivitylogs` VALUES ('f17eb8d5c65a4262ab2bee3e1ea17e24', '2023-03-14 00:47:08.127364', 'Sold With', 'YES', 'SAMPLE COMPANY', 1, '815aa8fcbd064093a5f59614e0d334b7', 'choices');
 
 -- ----------------------------
@@ -401,34 +420,34 @@ CREATE TABLE `customers_customers`  (
   INDEX `customers_customers_permit_approved_id_ed49cb9f`(`permit_approved_id`) USING BTREE,
   INDEX `customers_customers_permit_submitted_id_d45cb475`(`permit_submitted_id`) USING BTREE,
   INDEX `customers_customers_group_id_ba27131b_fk_customers`(`group_id`) USING BTREE,
-  CONSTRAINT `customers_customers_battery_id_0034ac66_fk_customers` FOREIGN KEY (`battery_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_battery_id_0034ac66_fk_customers` FOREIGN KEY (`battery_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_closer_id_dfcbc787_fk_auth_user_id` FOREIGN KEY (`closer_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_contractor_id_97e2d73b_fk_auth_user_id` FOREIGN KEY (`contractor_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_created_by_id_bcaace5c_fk_auth_user_id` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_design_requested_id_43cb051d_fk_customers` FOREIGN KEY (`design_requested_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_equipment_ordered_id_a3ecade3_fk_customers` FOREIGN KEY (`equipment_ordered_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_design_requested_id_43cb051d_fk_customers` FOREIGN KEY (`design_requested_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_equipment_ordered_id_a3ecade3_fk_customers` FOREIGN KEY (`equipment_ordered_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_group_id_ba27131b_fk_customers` FOREIGN KEY (`group_id`) REFERENCES `customers_customergroups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_ic_approved_id_2e9b2057_fk_customers` FOREIGN KEY (`ic_approved_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_ic_submitted_id_cefa8266_fk_customers` FOREIGN KEY (`ic_submitted_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_install_complete_id_f723b98d_fk_customers` FOREIGN KEY (`install_complete_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_install_confirmed_id_3db5fba4_fk_customers` FOREIGN KEY (`install_confirmed_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_ic_approved_id_2e9b2057_fk_customers` FOREIGN KEY (`ic_approved_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_ic_submitted_id_cefa8266_fk_customers` FOREIGN KEY (`ic_submitted_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_install_complete_id_f723b98d_fk_customers` FOREIGN KEY (`install_complete_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_install_confirmed_id_3db5fba4_fk_customers` FOREIGN KEY (`install_confirmed_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_manager_id_3b7d507b_fk_auth_user_id` FOREIGN KEY (`manager_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_pe_stamp_requested_i_c1272941_fk_customers` FOREIGN KEY (`pe_stamp_requested_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_permit_approved_id_ed49cb9f_fk_customers` FOREIGN KEY (`permit_approved_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_pe_stamp_requested_i_c1272941_fk_customers` FOREIGN KEY (`pe_stamp_requested_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_permit_approved_id_ed49cb9f_fk_customers` FOREIGN KEY (`permit_approved_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_permit_specialist_id_d551f19c_fk_auth_user` FOREIGN KEY (`permit_specialist_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_permit_submitted_id_d45cb475_fk_customers` FOREIGN KEY (`permit_submitted_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `customers_customers_permit_submitted_id_d45cb475_fk_customers` FOREIGN KEY (`permit_submitted_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT,
   CONSTRAINT `customers_customers_setter_id_6efc3ff6_fk_auth_user_id` FOREIGN KEY (`setter_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customers_customers_sold_with_id_9a28083a_fk_customers` FOREIGN KEY (`sold_with_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+  CONSTRAINT `customers_customers_sold_with_id_9a28083a_fk_customers` FOREIGN KEY (`sold_with_id`) REFERENCES `customers_customerselectoptions` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customers_customers
 -- ----------------------------
-INSERT INTO `customers_customers` VALUES ('12d35192a11b4ac5b8c3f4f7c842615e', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, 'dbad68e5f91d4ef08e47399cc2bba4cc', NULL, 'chadescol321@gmail.com', '6efd20ca11b24097b76dff531afedce9', '', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', NULL, NULL, NULL, '', 'Hudson Kirt', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'aasds', '', 'axc', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:22:01.541603', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'ee9422c3598341b8ae9663bebf4ff25e', NULL, 'a167f9a9179841ad9dd8ac1ce8b120d5');
-INSERT INTO `customers_customers` VALUES ('814c236ba5a949058e7bd5899655fb0f', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'John Watsons', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-12 21:22:40.395505', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'be0872f8da4e47ad8e71641b6710570c', NULL, NULL);
-INSERT INTO `customers_customers` VALUES ('815aa8fcbd064093a5f59614e0d334b7', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, 'dbad68e5f91d4ef08e47399cc2bba4cc', NULL, 'chardrichescol@gmail.com', '6efd20ca11b24097b76dff531afedce9', '', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', NULL, NULL, NULL, '', 'Chad Escol', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'zxc', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:23:43.364755', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'ee9422c3598341b8ae9663bebf4ff25e', NULL, NULL);
-INSERT INTO `customers_customers` VALUES ('823d96965fff439ea5a484f3ee3895ec', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'Chad Escol', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-13 23:00:04.164101', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'd489ec0c0e5d4d04825e4d3cfa34e080', NULL, NULL);
-INSERT INTO `customers_customers` VALUES ('b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'asdasd', '684 Osborne St', 'asdasknd', 'asdsad', 'zxczxczxc', '5640ff049e39452d99d29bb887455a84', '50', 'a', '060360e587494499b69762b51af0fb14', '2023-03-03', 'johnwick@gmail.com', '16feb1e4233749ccbf0c6f9fed464ad0', 'Finance Company', '5f7a4c8759a34358b786de529036f324', '3a12c7b61a824f41a28dc5fe633cca94', '2023-03-15', '9750859c8dd14eaeb5f2516acd9c829f', '9634692781424543a303fd381954df7e', '6kw', 'John Wick', '25', 'asd', 'asd', 'asd', '6691f8b9bd3346a5b59d4e65829ae6d6', '48a49920152747a59b3898955c9c6c6e', 'asodjasd', '12345', 'cdc06d68f0f648579589d2942c83c5de', '14314413555', 'Test Companys', '124000', 'Stay Strong', 'Utah', 'asdasd', 'asd', 'sample only', '2023-03-03', 1, '2023-03-05 12:55:51.186570', 1, 5, 2, 3, 'qweqwe', 4, 6, 'd489ec0c0e5d4d04825e4d3cfa34e080', '234234', NULL);
+INSERT INTO `customers_customers` VALUES ('12d35192a11b4ac5b8c3f4f7c842615e', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chadescol321@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'Hudson Kirt', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'aasds', '', 'axc', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:22:01.541603', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'a167f9a9179841ad9dd8ac1ce8b120d5');
+INSERT INTO `customers_customers` VALUES ('814c236ba5a949058e7bd5899655fb0f', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'John Watsons', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-12 21:22:40.395505', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '94884b0b070d4238b2a30a68589a7bd5');
+INSERT INTO `customers_customers` VALUES ('815aa8fcbd064093a5f59614e0d334b7', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'Chad Escol', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', 'zxc', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-09 15:23:43.364755', 1, NULL, NULL, NULL, NULL, NULL, NULL, '2cbd31bca81f42bb87d3cd3386efbb4d', NULL, '94884b0b070d4238b2a30a68589a7bd5');
+INSERT INTO `customers_customers` VALUES ('823d96965fff439ea5a484f3ee3895ec', NULL, '684 Osborne St', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chardrichescol@gmail.com', NULL, '', NULL, NULL, NULL, NULL, NULL, '', 'Chad Escol', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14314413555', '', '', '', 'Utah', NULL, NULL, NULL, NULL, 1, '2023-03-13 23:00:04.164101', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'f2ab12b88623428f970601c03650cf32');
+INSERT INTO `customers_customers` VALUES ('b0ac0f4bcb6c4b5f8b6fd9bf1ce962ae', 'asdasd', '684 Osborne St', 'asdasknd', 'asdsad', 'zxczxczxc', NULL, '50', 'a', NULL, '2023-03-03', 'johnwick@gmail.com', NULL, 'Finance Company', NULL, NULL, '2023-03-15', NULL, NULL, '6kw', 'John Wick', '25', 'asd', 'asd', 'asd', NULL, NULL, 'asodjasd', '12345', NULL, '14314413555', 'Test Companys', '124000', 'Stay Strong', 'Utah', 'asdasd', 'asd', 'sample only', '2023-03-03', 1, '2023-03-05 12:55:51.186570', 1, 5, 2, 3, 'qweqwe', 4, 6, 'f6ce32ef205d451da969a73af2928a96', '234234', NULL);
 
 -- ----------------------------
 -- Table structure for customers_customersattachments
@@ -477,33 +496,8 @@ CREATE TABLE `customers_customerselectoptions`  (
 -- ----------------------------
 -- Records of customers_customerselectoptions
 -- ----------------------------
-INSERT INTO `customers_customerselectoptions` VALUES ('060360e587494499b69762b51af0fb14', 'No', 'design_requested', '2023-03-05 13:17:50.186812', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('16feb1e4233749ccbf0c6f9fed464ad0', 'Yes', 'equipment_ordered', '2023-03-05 13:13:13.125073', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('1c46cae2aae840be94662fa63ddca65e', 'No', 'install_confirmed', '2023-03-05 13:12:36.476956', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('3a12c7b61a824f41a28dc5fe633cca94', 'Yes', 'install_confirmed', '2023-03-05 12:40:58.332538', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('41425f5eb4f4488985c05309d5f303d4', 'No Battery', 'battery', '2023-03-05 13:06:06.553536', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('48a49920152747a59b3898955c9c6c6e', 'No', 'permit_approved', '2023-03-05 13:10:42.653613', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('4a8bc2b9f03142cda4ea562381c462bf', 'Yes', 'permit_submitted', '2023-03-05 13:09:47.540148', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('4f1e644d977747d0a88a627c78fc8bd0', 'Yes', 'permit_approved', '2023-03-05 13:09:54.771610', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('5640ff049e39452d99d29bb887455a84', '3 KW', 'battery', '2023-03-05 13:07:16.785401', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('5f7a4c8759a34358b786de529036f324', 'No', 'install_complete', '2023-03-05 13:12:43.221096', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('62e213828d6648438530814547898c76', 'Yes', 'ic_approved', '2023-03-05 13:10:10.461923', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('6691f8b9bd3346a5b59d4e65829ae6d6', 'Yes', 'pe_stamp_requested', '2023-03-05 13:09:36.534354', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('6efd20ca11b24097b76dff531afedce9', 'NO', 'equipment_ordered', '2023-03-05 13:12:54.979984', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('94ddb2016ebf480fba29bae4845ab1a8', 'Yes', 'install_complete', '2023-03-05 13:13:23.811224', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('9634692781424543a303fd381954df7e', 'Yes', 'ic_submitted', '2023-03-05 13:10:01.862610', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('9750859c8dd14eaeb5f2516acd9c829f', 'No', 'ic_approved', '2023-03-05 13:10:14.607574', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('a555ccc86d544d64ae2b7835a1ab54ca', 'No', 'ic_submitted', '2023-03-05 13:10:52.094421', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('aadf0e2443c14930b7d04d8777e3af1b', 'Company 2', 'sold_with', '2023-03-04 23:47:08.857891', 1, 'primary');
-INSERT INTO `customers_customerselectoptions` VALUES ('bc93e114a9a648f6bee18d55394d5471', '10 KW', 'battery', '2023-03-05 13:07:36.412832', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('be0872f8da4e47ad8e71641b6710570c', 'YES', 'sold_with', '2023-03-05 12:16:22.932508', 1, 'danger');
-INSERT INTO `customers_customerselectoptions` VALUES ('cdc06d68f0f648579589d2942c83c5de', 'No', 'permit_submitted', '2023-03-05 13:10:31.929564', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('d489ec0c0e5d4d04825e4d3cfa34e080', 'yes', 'sold_with', '2023-03-05 13:08:45.121431', 1, 'warning');
-INSERT INTO `customers_customerselectoptions` VALUES ('dbad68e5f91d4ef08e47399cc2bba4cc', 'Yes', 'design_requested', '2023-03-05 13:09:08.555632', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('df9de0c069704307b093795c4950fd7d', 'No', 'pe_stamp_requested', '2023-03-05 13:10:23.727564', 1, '');
-INSERT INTO `customers_customerselectoptions` VALUES ('ee9422c3598341b8ae9663bebf4ff25e', 'ZXC', 'sold_with', '2023-03-05 13:08:38.251250', 1, 'dark');
-INSERT INTO `customers_customerselectoptions` VALUES ('f17cb5763edb4865b01829350b8815ee', 'TEST', 'sold_with', '2023-03-05 13:08:30.605852', 1, 'secondary');
-INSERT INTO `customers_customerselectoptions` VALUES ('f36ec6adcec2498f8e3c36ed48eb7de9', '6 KW', 'battery', '2023-03-05 13:07:29.369686', 1, '');
+INSERT INTO `customers_customerselectoptions` VALUES ('2cbd31bca81f42bb87d3cd3386efbb4d', 'Yes', 'sold_with', '2023-03-14 10:21:54.150312', 1, 'success');
+INSERT INTO `customers_customerselectoptions` VALUES ('f6ce32ef205d451da969a73af2928a96', 'No', 'sold_with', '2023-03-14 10:36:24.678968', 1, 'danger');
 
 -- ----------------------------
 -- Table structure for customers_customerspeople

@@ -102,6 +102,7 @@
          <thead>
             <!--begin::Table row-->
             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+               <th class="min-w-125px">Group</th>
                <th class="min-w-125px">Name</th>
                <th class="min-w-125px">Email</th>
                <th class="min-w-125px">Phone</th>
@@ -250,6 +251,17 @@
                   <input type="hidden" name="field_option_name" required>
                   <input class="form-control form-control-solid" placeholder="New Option" name="option_name" type="text" required/>
                </div>
+               <div class="d-flex flex-column mb-7 fv-row">
+                  <select name="color" data-control="select2" data-placeholder="Select a Color" data-dropdown-parent="#addOptionForm" class="form-select form-select-sm form-select-solid">
+                     <option></option>
+                     <option value="success">Green</option>
+                     <option value="primary">Blue</option>
+                     <option value="danger">Red</option>
+                     <option value="warning">Yellow</option>
+                     <option value="dark">Dark</option>
+                     <option value="secondary">Grey</option>
+                  </select>
+               </div>
          </div>
          <div class="modal-footer">
          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -272,6 +284,120 @@
 <script src="{% static 'assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
 <script src="https://unpkg.com/htmx.org@1.8.6"></script>
 <script>
+   const selectOption = (pk, field_name) => {
+      $('#selectOptionModalBody').empty().load(`/customers/select-option/${pk}/${field_name}/`);
+      $('#selectOptionModal').modal('toggle');
+   }
+
+   const addOption = (field_option_name) => {
+      $('input[name=field_option_name]').val(field_option_name)
+      $('#addOptionModal').modal('toggle');
+   }
+
+   const selectGroup = (customer_id, group_id) => {
+        $.ajax({
+             type: 'POST',
+             url: '/customers/select-group/',
+             data: {'id': customer_id, 'group_id': group_id, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()},
+             success: (result) => {
+                 const statusMsg = result['statusMsg'];
+                 toastr.options = {
+                     closeButton: false,
+                     debug: false,
+                     newestOnTop: false,
+                     progressBar: false,
+                     positionClass: "toastr-top-right",
+                     preventDuplicates: false,
+                     onclick: null,
+                     showDuration: "300",
+                     hideDuration: "1000",
+                     timeOut: "5000",
+                     extendedTimeOut: "1000",
+                     showEasing: "swing",
+                     hideEasing: "linear",
+                     showMethod: "fadeIn",
+                     hideMethod: "fadeOut",
+                 };
+                 toastr.success(`${statusMsg} Updated`);
+                 location.reload(true)
+             },
+             error: (result) => {
+                 const statusMsg = result['responseJSON']['statusMsg'];
+                 toastr.options = {
+                     closeButton: false,
+                     debug: false,
+                     newestOnTop: false,
+                     progressBar: false,
+                     positionClass: "toastr-top-right",
+                     preventDuplicates: false,
+                     onclick: null,
+                     showDuration: "300",
+                     hideDuration: "1000",
+                     timeOut: "5000",
+                     extendedTimeOut: "1000",
+                     showEasing: "swing",
+                     hideEasing: "linear",
+                     showMethod: "fadeIn",
+                     hideMethod: "fadeOut",
+                 };
+                 toastr.error(`${statusMsg}`);
+             }
+        });
+    }
+
+   const saveUpdate = (customer_id, field, input_value, field_type) => {
+        $.ajax({
+             type: 'POST',
+             url: '/customers/update/',
+             data: {'id': customer_id, 'field': field, 'value': input_value, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(), 'field_type': field_type},
+             success: (result) => {
+                 const statusMsg = result['statusMsg'];
+                 toastr.options = {
+                     closeButton: false,
+                     debug: false,
+                     newestOnTop: false,
+                     progressBar: false,
+                     positionClass: "toastr-top-right",
+                     preventDuplicates: false,
+                     onclick: null,
+                     showDuration: "300",
+                     hideDuration: "1000",
+                     timeOut: "5000",
+                     extendedTimeOut: "1000",
+                     showEasing: "swing",
+                     hideEasing: "linear",
+                     showMethod: "fadeIn",
+                     hideMethod: "fadeOut",
+                 };
+                 toastr.success(`${statusMsg} Updated`);
+                 if(field_type == "selection"){
+                     location.reload(true);
+                 }
+             },
+             error: (result) => {
+                 const statusMsg = result['responseJSON']['statusMsg'];
+                 toastr.options = {
+                     closeButton: false,
+                     debug: false,
+                     newestOnTop: false,
+                     progressBar: false,
+                     positionClass: "toastr-top-right",
+                     preventDuplicates: false,
+                     onclick: null,
+                     showDuration: "300",
+                     hideDuration: "1000",
+                     timeOut: "5000",
+                     extendedTimeOut: "1000",
+                     showEasing: "swing",
+                     hideEasing: "linear",
+                     showMethod: "fadeIn",
+                     hideMethod: "fadeOut",
+                 };
+                 toastr.error(`${statusMsg}`);
+             }
+        });
+    }
+
    const viewUpdatesBtn = (pk) => {
        const loadingEl = document.createElement("div");
        document.body.prepend(loadingEl);
@@ -347,6 +473,8 @@
                                 hideMethod: "fadeOut",
                             };
                             toastr.success(`${statusMsg}`);
+                            $('#addOptionForm').trigger('reset');
+                            $(e.target).find("select[name=color]").val('').trigger('change')
                        },
                        error: (result) => {
                         const statusMsg = result['responseJSON']['statusMsg'];

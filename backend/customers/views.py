@@ -145,9 +145,7 @@ def customer_update_page(request):
         customer = Customers.objects.get(id=request.POST.get('id'))
         field = request.POST.get('field')
         field_type = request.POST.get('field_type')
-
         if field_type == "selection":
-            print('dri')
             value = CustomerSelectOptions.objects.filter(id=request.POST.get('value')).first()
             if field == "sold_with":
                 with transaction.atomic():
@@ -416,10 +414,12 @@ def customer_add_option_page(request):
     try:
         field_name = request.POST.get('field_option_name')
         option_name = request.POST.get('option_name')
+        color = request.POST.get('color')
 
         if option_name:
             if not CustomerSelectOptions.objects.filter(field_name=field_name, name__icontains=option_name).first():
-                CustomerSelectOptions.objects.create(field_name=field_name, name=option_name, created_by=request.user)
+                CustomerSelectOptions.objects.create(color=color, field_name=field_name, name=option_name,
+                                                     created_by=request.user)
                 return JsonResponse({'statusMsg': f'{option_name} Option Added'}, status=200)
             else:
                 return JsonResponse({'statusMsg': 'Option Name Already Exist'}, status=404)
@@ -471,5 +471,23 @@ def select_option_page(request, pk, field_name):
         else:
             context['data'] = CustomerSelectOptions.objects.filter(field_name=field_name).all()
             return render(request, 'backend/customers/partials/select-option-modal-body.html', context)
+    except Exception as e:
+        print(e)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['POST'])
+def select_group_page(request):
+    try:
+        print('here')
+        if request.method == "POST":
+            customer = Customers.objects.filter(id=request.POST.get('id')).first()
+            group = CustomerGroups.objects.filter(id=request.POST.get('group_id')).first()
+            print(group)
+            print(customer)
+            customer.group = group
+            customer.save()
+            print(customer.group)
+            return JsonResponse({'statusMsg': 'Success'}, status=200)
     except Exception as e:
         print(e)
