@@ -1,0 +1,10 @@
+<div class="list-group">
+
+    {% for row in data %}
+    <div class="d-flex justify-content-between">
+        <a href="#" class="list-group-item list-group-item-action bg-{{ row.color }} text-inverse-{{ row.color }}">{{ row.name|upper }}</a>
+    </div>
+    {% endfor %}
+
+
+</div>

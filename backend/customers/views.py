@@ -13,7 +13,6 @@ context = {}
 @require_http_methods(['GET'])
 def index_page(request):
     try:
-        print('here')
         if request.method == "GET":
             return redirect('/customers/list/')
             context['title'] = 'PEAK CRM | Customers'
@@ -32,7 +31,8 @@ def customers_lists_page(request):
         context['module_name'] = 'Customers'
         context['action'] = 'lists'
         context['breadcrumbs'] = ['Home', 'Lists']
-        context['data'] = Customers.objects.all()
+        context['data'] = Customers.objects.filter(group=None).all()
+        CustomerSelectOptions.objects.filter(id='185ca78c530346d1a328565e2c4e6737').delete()
         return render(request, 'backend/customers/lists.html', context)
     except Exception as e:
         print(e)
@@ -147,8 +147,8 @@ def customer_update_page(request):
         field_type = request.POST.get('field_type')
 
         if field_type == "selection":
+            print('dri')
             value = CustomerSelectOptions.objects.filter(id=request.POST.get('value')).first()
-            print(customer.sold_with)
             if field == "sold_with":
                 with transaction.atomic():
                     CustomerActivityLogs.objects.create(customer=customer, created_by=request.user, field_name='Sold '
@@ -450,13 +450,26 @@ def add_group_page(request):
 @require_http_methods(['GET'])
 def groups_index_page(request):
     try:
-        print(type(request.GET.get('filter_group')))
-        if request.GET.get('filter_group'):
+        if request.GET.get('filter_group') and request.GET.get('filter_group') != "":
             print('here')
             context['data'] = Customers.objects.filter(group_id=request.GET.get('filter_group')).all()
             return render(request, 'backend/customers/partials/lists-table.html', context)
         elif not request.GET.get('filter_group'):
-            context['data'] = Customers.objects.all()
+            print('drio')
+            context['data'] = Customers.objects.filter(group=None).all()
             return render(request, 'backend/customers/partials/lists-table.html', context)
+    except Exception as e:
+        print(e)
+
+
+@login_required(login_url='/authentication/sign-in/')
+@require_http_methods(['GET', 'POST'])
+def select_option_page(request, pk, field_name):
+    try:
+        if request.method == "POST":
+            print('here')
+        else:
+            context['data'] = CustomerSelectOptions.objects.filter(field_name=field_name).all()
+            return render(request, 'backend/customers/partials/select-option-modal-body.html', context)
     except Exception as e:
         print(e)

@@ -1,51 +1,3 @@
-"use strict";
-var KTModalCustomersAdd = (function () {
-    var t, e, o, n, r, i;
-    return {
-        init: function () {
-            (i = new bootstrap.Modal(document.querySelector("#addCustomerModal"))),
-                (r = document.querySelector("#addCustomerForm")),
-                (e = r.querySelector("#kt_modal_add_customer_cancel")),
-                (o = r.querySelector("#kt_modal_add_customer_close")),
-                e.addEventListener("click", function (t) {
-                    t.preventDefault(),
-                        Swal.fire({
-                            text: "Are you sure you would like to cancel?",
-                            icon: "warning",
-                            showCancelButton: !0,
-                            buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
-                        }).then(function (t) {
-                            t.value
-                                ? (r.reset(), i.hide())
-                                : "cancel" === t.dismiss && Swal.fire({ text: "Your form has not been cancelled!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
-                        });
-                }),
-                o.addEventListener("click", function (t) {
-                    t.preventDefault(),
-                        Swal.fire({
-                            text: "Are you sure you would like to cancel?",
-                            icon: "warning",
-                            showCancelButton: !0,
-                            buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
-                        }).then(function (t) {
-                            t.value
-                                ? (r.reset(), i.hide())
-                                : "cancel" === t.dismiss && Swal.fire({ text: "Your form has not been cancelled!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
-                        });
-                });
-        },
-    };
-})();
-KTUtil.onDOMContentLoaded(function () {
-    KTModalCustomersAdd.init();
-});
-
 const viewUpdatesBtn = (pk) => {
     const loadingEl = document.createElement("div");
     document.body.prepend(loadingEl);
@@ -689,12 +641,6 @@ $(document).ready(function(){
                      }
                  });
             }
-        });
-    });
-
-    window.addEventListener("DOMContentLoaded", (e) => {
-          $('#filter_group').on('select2:select', function (e) {
-           $(this).get(0).dispatchEvent(new Event('change'));
         });
     });
 });

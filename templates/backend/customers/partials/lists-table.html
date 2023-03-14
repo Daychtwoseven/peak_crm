@@ -6,572 +6,844 @@
 {% contractors request as contractors %}
 {% permit_specialists request as permit_specialists %}
 {% colors as colors %}
+{% for row in data %}
+<tr>
+   <td>
+      <input type="hidden" name="id_customer" value="{{ row.id }}">
+      <a onClick="viewUpdatesBtn('{{ row.id }}');" class="cursor-pointer text-gray-800 text-hover-primary mb-1" title="View Updates">{{ row.name }}</a>
+   </td>
+   <td>
+      <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ row.email }}</a>
+   </td>
+   <td>{{ row.phone }}</td>
+   <td>{{ row.address }}</td>
+   <td>{{ row.state }}</td>
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.previous_company %}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <a class="btn btn-sm btn-bg-{{ row.sold_with.color }} text-inverse-{{ row.sold_with.color }} w-125px cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">{{ row.sold_with.name|upper }}
+      <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+      <span class="svg-icon svg-icon-5 m-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
+          </svg>
+      </span>
+      <!--end::Svg Icon--></a>
+      <!--begin::Menu-->
+      <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+         {% customer_selection_options 'sold_with' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+             <div class="menu-item px-3">
+                 <a class="menu-link px-3 bg-{{ i.color }} text-inverse-{{ i.color }} cursor-pointer" onClick="saveUpdate('{{ row.id }}', '{{ i.field_name }}', '{{ i.id }}', 'selection  ')">{{ i.name|upper}}</a>
+             </div>
+            {% endfor %}
+      </div>
+      <!--end::Menu-->
+      <!--
+      <div class="input-group input-group-sm">
+         <select name="td_sold_with" class="form-select form-select-sm form-select-solid bg-{{ row.sold_with.color }} text-inverse-{{ row.sold_with.color }}">
+            <option class="bg-white text-white"></option>
+            {% customer_selection_options 'sold_with' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.sold_with.id == i.id %}
+            <option value="{{ i.id }}" class="bg-{{ i.color }} text-inverse-{{ i.color }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}" class="bg-{{ i.color }} text-inverse-{{ i.color }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add" class="bg-white text-dark bg-hover-opacity-0">Add Option</option>
+         </select>
+      </div>
+      -->
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="date" value="{% none_checker row.dob %}" name="td_dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.ss %}" name="td_ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.finance_company %}" name="td_finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.number_of_panels %}" name="td_number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="date" value="{% none_checker row.contract_signed_date %}" name="td_contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'design_requested' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.design_requested.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_pe_stamp_requested" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'pe_stamp_requested' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.pe_stamp_requested.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'permit_submitted' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.permit_submitted.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_permit_approved" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'permit_approved' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.permit_approved.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'ic_submitted' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.ic_submitted.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_ic_approved" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'ic_approved' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.ic_approved.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="date" value="{% none_checker row.install_date %}" name="td_install_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_install_confirmed" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'install_confirmed' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.install_confirmed.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_install_complete" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'install_complete' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.install_complete.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_equipment_ordered" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'equipment_ordered' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.equipment_ordered.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.contract_value %}" name="td_contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.ahj %}" name="td_ahj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.ahj_phone %}" name="td_ahj_phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.permit_plan_number %}" name="td_permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.permit_notes %}" name="td_permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.utility_and_esid %}" name="td_utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% if row.approved_permit %}
+   <td>
+      <i class="bi bi-filetype-pdf"></i> <a href="{{ row.approved_permit.attachment }}" class="text-dark" target="_blank">ApprovedPermit.pdf</a>
+   </td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
+   {% if row.contract %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.contract.attachment }}" class="text-dark" target="_blank">Contract.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
+   {% if row.stamped_plans %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.stamped_plans.attachment }}" class="text-dark" target="_blank">StampedPlans.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% endif %}
+   {% if row.ub %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.ub.attachment }}" class="text-dark" target="_blank">UB.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% if row.hoi %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.hoi.attachment }}" class="text-dark" target="_blank">HOI.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   {% if row.front_of_house %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.front_of_house.attachment }}" class="text-dark" target="_blank">FrontofHouse.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% if row.panel_layout %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.panel_layout.attachment }}" class="text-dark" target="_blank">PanelLayout.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
+   {% if row.post_install_letter %}
+   <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.post_install_letter.attachment }}" class="text-dark" target="_blank">PostInstallLetter.pdf</a></td>
+   {% else %}
+   <td></td>
+   {% endif %}
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <select name="td_battery" class="form-select form-select-sm form-select-solid">
+            <option></option>
+            {% customer_selection_options 'battery' as customer_selection_options %}
+            {% for i in customer_selection_options %}
+            {% if row.battery.id == i.id %}
+            <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
+            {% else %}
+            <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
+            {% endif %}
+            {% endfor %}
+            <option value="Add">Add Option</option>
+         </select>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.kw %}" name="td_kw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.project_cost %}" name="td_project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.their_company_cost %}" name="td_their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.their_company_mo %}" name="td_their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.commission_percentage %}" name="td_commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.calc_red %}" name="td_calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   {% if request.user.groups.all.0.name == "admin" %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.bank_funded %}" name="td_bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.adders %}" name="td_adders" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.design_fee %}" name="td_design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   {% endif %}
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.paid_to_manager %}" name="td_paid_to_manager" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.paid_to_closer %}" name="td_paid_to_closer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td>
+      <div class="input-group input-group-sm">
+         <input type="text" value="{% none_checker row.paid_to_setter %}" name="td_paid_to_setter" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+      </div>
+   </td>
+   <td class="bg-warning text-white">{% if row.manager %} {{ row.manager.first_name }} {{ row.manager.last_name }} {% endif %}</td>
+   <td class="bg-success text-white">{% if row.setter %} {{ row.setter.first_name }} {{ row.setter.last_name }} {% endif %}</td>
+   <td class="bg-info text-white">{% if row.closer %} {{ row.closer.first_name }} {{ row.closer.last_name }} {% endif %}</td>
+   <td class="bg-success text-white">{% if row.contractor %} {{ row.contractor.first_name }} {{ row.contractor.last_name }} {% endif %}</td>
+   <td class="bg-info text-white">{% if row.permit_specialist %} {{ row.permit_specialist.first_name }} {{ row.permit_specialist.last_name }} {% endif %}</td>
+   <td>
+      <div class="symbol-group symbol-hover flex-nowrap">
+         {% for i in row.get_people %}
+         <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title="{{ i.get_fullname }}">
+            <span class="symbol-label bg-{{ colors|random }} text-gray-300 fw-bold">{{ i.get_fullname|make_list|first }}</span>
+         </div>
+         {% endfor %}
+         <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+         <span class="symbol-label bg-dark text-gray-300 fs-8 fw-bold">+42</span>
+         </a>
+      </div>
+   </td>
+   <td>
+      <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title='Created by {{ row.get_created_by_fullname|capfirst }} on {{ row.date_created|date:"F j, Y" }} at {{ row.date_created|date:"f A" }}'>
+         <img alt="Pic" src="{% static 'assets/media/avatars/blank.png' %}" /> &nbsp;<small>{{ row.date_created|date:"N j" }}</small>
+      </div>
+   </td>
+</tr>
+{% endfor %}
+{% block script %}
+<script src="{% static 'assets/plugins/global/plugins.bundle.js' %}"></script>
+<script src="{% static 'assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+<script>
+   const selectOption = (pk, field_name) => {
+      $('#selectOptionModalBody').empty().load(`/customers/select-option/${pk}/${field_name}/`);
+      $('#selectOptionModal').modal('toggle');
+   }
 
-<!--end::Table head-->
-<table class="table align-middle table-row-bordered" id="kt_customers_table">
-    <!--begin::Table head-->
-    <thead>
-    <!--begin::Table row-->
-    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-        <th class="w-10px pe-2">
-            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
-            </div>
-        </th>
-        <th class="min-w-125px">Name</th>
-        <th class="min-w-125px">Email</th>
-        <th class="min-w-125px">Phone</th>
-        <th class="min-w-125px">Address</th>
-        <th class="min-w-125px">State</th>
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Previous Company</th>
-        <th class="min-w-125px">Sold With</th>
-        <th class="min-w-125px">DOB</th>
-        <th class="min-w-125px">SS</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Finance Company</th>
-        <th class="min-w-125px"># of Panels</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Contract Signed Date</th>
-        <th class="min-w-150px">Design Requested</th>
-        <th class="min-w-10px">PE Stamp Requested</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
-        <th class="min-w-10px">Permit Submitted?</th>
-        <th class="min-w-10px">Permit Approved?</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-10px">IC Submitted?</th>
-        <th class="min-w-100px">IC Approved?</th>
-        <th class="min-w-125px">Install Date</th>
-        <th class="min-w-125px">Install Confirmed</th>
-        <th class="min-w-125px">Install Complete</th>
-        <th class="min-w-125px">Equipment Ordered</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
-        <th class="min-w-125px">Contract Value</th>
-        <th class="min-w-125px">AHJ</th>
-        <th class="min-w-125px">AHJ Phone</th>
-        <th class="min-w-125px">Permit Plan #</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Permit Notes</th>
-        {% endif %}
-        <th class="min-w-125px">Utility and ESID</th>
-        <th class="min-w-150px">Approved Permit</th>
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
-        <th class="min-w-125px">Contract</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-        <th class="min-w-125px">Stamped Plans</th>
-        {% endif %}
-        <th class="min-w-125px">UB</th>
-        <th class="min-w-125px">HOI</th>
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Front of House</th>
-        <th class="min-w-125px">Panel Layout</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-        <th class="min-w-150px">Post Install Letter</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Battery</th>
-        <th class="min-w-125px">KW</th>
-        <th class="min-w-125px">Project Cost</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Their Company Cost</th>
-        <th class="min-w-125px">Their Company Mo</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
-        <th class="min-w-125px">Commission %</th>
-        <th class="min-w-125px">Calc/Red</th>
-        {% endif %}
-        {% if request.user.groups.all.0.name == "admin" %}
-        <th class="min-w-125px">Bank Funded</th>
-        <th class="min-w-125px">Adders</th>
-        <th class="min-w-125px">Design Fee/PE Stamp</th>
-        {% endif %}
-        <th class="min-w-125px">Paid to Manager</th>
-        <th class="min-w-125px">Paid to Closer</th>
-        <th class="min-w-125px">Paid to Setter</th>
-        <th class="min-w-125px">Manager</th>
-        <th class="min-w-125px">Setter</th>
-        <th class="min-w-125px">Closer</th>
-        <th class="min-w-125px">Contractor</th>
-        <th class="min-w-125px">Permit Specialist</th>
-        <th class="min-w-125px">People</th>
-        <th class="min-w-150px">Creation Log</th>
-    </tr>
-    <!--end::Table row-->
-    </thead>
-    <!--begin::Table body-->
-       <tbody class="fw-semibold text-gray-600" id="kt_customers_tbody">
-          {% for row in data %}
-             <tr>
-                <!--begin::Checkbox-->
-                <td>
-                   <div class="form-check form-check-sm form-check-custom form-check-solid">
-                      <input class="form-check-input" type="checkbox" value="1" />
-                      <input type="hidden" name="id_customer" value="{{ row.id }}">
-                   </div>
-                </td>
+   const saveUpdate = (customer_id, field, input_value, field_type) => {
+           $.ajax({
+                type: 'POST',
+                url: '/customers/update/',
+                data: {'id': customer_id, 'field': field, 'value': input_value, 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(), 'field_type': field_type},
+                success: (result) => {
+                    const statusMsg = result['statusMsg'];
+                    toastr.options = {
+                        closeButton: false,
+                        debug: false,
+                        newestOnTop: false,
+                        progressBar: false,
+                        positionClass: "toastr-top-right",
+                        preventDuplicates: false,
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "1000",
+                        timeOut: "5000",
+                        extendedTimeOut: "1000",
+                        showEasing: "swing",
+                        hideEasing: "linear",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut",
+                    };
+                    toastr.success(`${statusMsg} Updated`);
+                },
+                error: (result) => {
+                    const statusMsg = result['responseJSON']['statusMsg'];
+                    toastr.options = {
+                        closeButton: false,
+                        debug: false,
+                        newestOnTop: false,
+                        progressBar: false,
+                        positionClass: "toastr-top-right",
+                        preventDuplicates: false,
+                        onclick: null,
+                        showDuration: "300",
+                        hideDuration: "1000",
+                        timeOut: "5000",
+                        extendedTimeOut: "1000",
+                        showEasing: "swing",
+                        hideEasing: "linear",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut",
+                    };
+                    toastr.error(`${statusMsg}`);
+                }
+           });
+       }
 
-                <td>
-                   <a onClick="viewUpdatesBtn('{{ row.id }}');" class="cursor-pointer text-gray-800 text-hover-primary mb-1" title="View Updates">{{ row.name }}</a>
-                </td>
+   $(document).ready(function(){
+       $("#customers-table tbody select[name=td_sold_with]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_sold_with]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                <td>
-                   <a href="#" class="text-gray-600 text-hover-primary mb-1">{{ row.email }}</a>
-                </td>
+           input_value == "Add" ? addOption('sold_with') : saveUpdate(customer_id, 'sold_with', input_value, 'selection')
+       });
 
-                <td>{{ row.phone }}</td>
+       $("#customers-table tbody input[name=td_previous_company]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_previous_company]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'previous_company', input_value, 'input')
+           }
+       });
 
-                <td>{{ row.address }}</td>
+       $("#customers-table tbody input[name=td_dob]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("input[name=td_dob]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
+           saveUpdate(customer_id, 'dob', input_value, 'input')
+       });
 
-                <td>{{ row.state }}</td>
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.previous_company %}" name="td_previous_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_ss]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_ss]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'ss', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_sold_with" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'sold_with' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.sold_with.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_finance_company]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_finance_company]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'finance_company', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="date" value="{% none_checker row.dob %}" name="td_dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_number_of_panels]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_number_of_panels]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'number_of_panels', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.ss %}" name="td_ss" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.finance_company %}" name="td_finance_company" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_contract_signed_date]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("input[name=td_contract_signed_date]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
+           saveUpdate(customer_id, 'contract_signed_date', input_value, 'input')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.number_of_panels %}" name="td_number_of_panels" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="date" value="{% none_checker row.contract_signed_date %}" name="td_contract_signed_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_install_date]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("input[name=td_install_date]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
+           saveUpdate(customer_id, 'install_date', input_value, 'input')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_design_requested" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'design_requested' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.design_requested.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+       $("#customers-table tbody select[name=td_design_requested]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_design_requested]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_pe_stamp_requested" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'pe_stamp_requested' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.pe_stamp_requested.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
-                {% endif %}
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "permit_specialist" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_permit_submitted" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'permit_submitted' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.permit_submitted.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+           input_value == "Add" ? addOption('design_requested') : saveUpdate(customer_id, 'design_requested', input_value, 'selection')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_permit_approved" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'permit_approved' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.permit_approved.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
-                {% endif %}
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_ic_submitted" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'ic_submitted' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.ic_submitted.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+       $("#customers-table tbody select[name=td_pe_stamp_requested]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_pe_stamp_requested]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_ic_approved" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'ic_approved' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.ic_approved.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+           input_value == "Add" ? addOption('pe_stamp_requested') : saveUpdate(customer_id, 'pe_stamp_requested', input_value, 'selection')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="date" value="{% none_checker row.install_date %}" name="td_install_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody select[name=td_permit_submitted]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_permit_submitted]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_install_confirmed" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'install_confirmed' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.install_confirmed.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+           input_value == "Add" ? addOption('permit_submitted') : saveUpdate(customer_id, 'permit_submitted', input_value, 'selection')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_install_complete" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'install_complete' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.install_complete.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+       $("#customers-table tbody select[name=td_permit_approved]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_permit_approved]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_equipment_ordered" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'equipment_ordered' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.equipment_ordered.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
-                {% endif %}
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "permit_specialist" %}
-               <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.contract_value %}" name="td_contract_value" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+           input_value == "Add" ? addOption('permit_approved') : saveUpdate(customer_id, 'permit_approved', input_value, 'selection')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.ahj %}" name="td_ahj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody select[name=td_ic_submitted]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_ic_submitted]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.ahj_phone %}" name="td_ahj_phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+           input_value == "Add" ? addOption('ic_submitted') : saveUpdate(customer_id, 'ic_submitted', input_value, 'selection')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.permit_plan_number %}" name="td_permit_plan_number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.permit_notes %}" name="td_permit_notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.utility_and_esid %}" name="td_utility_and_esid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% if row.approved_permit %}
-                <td>
-                    <i class="bi bi-filetype-pdf"></i> <a href="{{ row.approved_permit.attachment }}" class="text-dark" target="_blank">ApprovedPermit.pdf</a>
-                </td>
-                {% else %}
-                 <td></td>
-                {% endif %}
+       $("#customers-table tbody select[name=td_ic_approved]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_ic_approved]").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" or request.user.groups.all.0.name == "contractor" %}
-                {% if row.contract %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.contract.attachment }}" class="text-dark" target="_blank">Contract.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
-                {% endif %}
+           input_value == "Add" ? addOption('ic_approved') : saveUpdate(customer_id, 'ic_approved', input_value, 'selection')
+       });
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-                {% if row.stamped_plans %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.stamped_plans.attachment }}" class="text-dark" target="_blank">StampedPlans.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
-                {% endif %}
+       $("#customers-table tbody select[name=td_install_confirmed]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_install_confirmed").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                {% if row.ub %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.ub.attachment }}" class="text-dark" target="_blank">UB.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
+           input_value == "Add" ? addOption('install_confirmed') : saveUpdate(customer_id, 'install_confirmed', input_value, 'selection')
+       });
 
-                {% if row.hoi %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.hoi.attachment }}" class="text-dark" target="_blank">HOI.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
+       $("#customers-table tbody select[name=td_install_complete]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_install_complete").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                {% if row.front_of_house %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.front_of_house.attachment }}" class="text-dark" target="_blank">FrontofHouse.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
+           input_value == "Add" ? addOption('install_complete') : saveUpdate(customer_id, 'install_complete', input_value, 'selection')
+       });
 
-                {% if row.panel_layout %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.panel_layout.attachment }}" class="text-dark" target="_blank">PanelLayout.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
-                {% endif %}
+       $("#customers-table tbody select[name=td_equipment_ordered]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_equipment_ordered").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" %}
-                {% if row.post_install_letter %}
-                <td><i class="bi bi-filetype-pdf"></i> <a href="{{ row.post_install_letter.attachment }}" class="text-dark" target="_blank">PostInstallLetter.pdf</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
-                {% endif %}
+           input_value == "Add" ? addOption('equipment_ordered') : saveUpdate(customer_id, 'equipment_ordered', input_value, 'selection')
+       });
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "contractor" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <select name="td_battery" class="form-select form-select-sm form-select-solid">
-                          <option></option>
-                           {% customer_selection_options 'battery' as customer_selection_options %}
-                           {% for i in customer_selection_options %}
-                            {% if row.battery.id == i.id %}
-                                <option value="{{ i.id }}" selected>{{ i.name|capfirst }}</option>
-                            {% else %}
-                                <option value="{{ i.id }}">{{ i.name|capfirst }}</option>
-                            {% endif %}
-                           {% endfor %}
-                           <option value="Add">Add Option</option>
-                       </select>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_contract_value]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_contract_value]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'contract_value', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.kw %}" name="td_kw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_ahj]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_ahj]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'ahj', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.project_cost %}" name="td_project_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-               {% endif %}
+       $("#customers-table tbody input[name=td_ahj_phone]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_ahj_phone]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'ahj_phone', input_value, 'input')
+           }
+       });
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "closer" or request.user.groups.all.0.name == "setter" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.their_company_cost %}" name="td_their_company_cost" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_permit_plan_number]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_permit_plan_number]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'permit_plan_number', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.their_company_mo %}" name="td_their_company_mo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
+       $("#customers-table tbody input[name=td_permit_notes]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_permit_notes]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'permit_notes', input_value, 'input')
+           }
+       });
 
-                {% if request.user.groups.all.0.name == "admin" or request.user.groups.all.0.name == "manager" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.commission_percentage %}" name="td_commission_percentage" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_utility_and_esid]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_utility_and_esid]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'utility_and_esid', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.calc_red %}" name="td_calc_red" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
+       $("#customers-table tbody select[name=td_battery]").change(function (ev) {
+           const current_row = $(this).closest("tr");
+           const input_value = current_row.find("select[name=td_battery").val();
+           const customer_id = current_row.find("input[name=id_customer]").val();
 
-                {% if request.user.groups.all.0.name == "admin" %}
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.bank_funded %}" name="td_bank_funded" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+           input_value == "Add" ? addOption('battery') : saveUpdate(customer_id, 'battery', input_value, 'selection')
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.adders %}" name="td_adders" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_kw]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_kw]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'kw', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.design_fee %}" name="td_design_fee" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
-                {% endif %}
+       $("#customers-table tbody input[name=td_project_cost]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_project_cost]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'project_cost', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.paid_to_manager %}" name="td_paid_to_manager" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_their_company_cost]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_their_company_cost]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'their_company_cost', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.paid_to_closer %}" name="td_paid_to_closer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_their_company_mo]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_their_company_mo]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'their_company_mo', input_value, 'input')
+           }
+       });
 
-                <td>
-                   <div class="input-group input-group-sm">
-                       <input type="text" value="{% none_checker row.paid_to_setter %}" name="td_paid_to_setter" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                   </div>
-                </td>
+       $("#customers-table tbody input[name=td_commission_percentage]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_commission_percentage]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'commission_percentage', input_value, 'input')
+           }
+       });
 
-                <td class="bg-warning text-white">{% if row.manager %} {{ row.manager.first_name }} {{ row.manager.last_name }} {% endif %}</td>
+       $("#customers-table tbody input[name=td_calc_red]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_calc_red]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'calc_red', input_value, 'input')
+           }
+       });
 
-                <td class="bg-success text-white">{% if row.setter %} {{ row.setter.first_name }} {{ row.setter.last_name }} {% endif %}</td>
+       $("#customers-table tbody input[name=td_adders]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_adders]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'adders', input_value, 'input')
+           }
+       });
 
-                <td class="bg-info text-white">{% if row.closer %} {{ row.closer.first_name }} {{ row.closer.last_name }} {% endif %}</td>
+       $("#customers-table tbody input[name=td_bank_funded]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_bank_funded]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'bank_funded', input_value, 'input')
+           }
+       });
 
-                <td class="bg-success text-white">{% if row.contractor %} {{ row.contractor.first_name }} {{ row.contractor.last_name }} {% endif %}</td>
+       $("#customers-table tbody input[name=td_design_fee]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_design_fee]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'design_fee', input_value, 'input')
+           }
+       });
 
-                <td class="bg-info text-white">{% if row.permit_specialist %} {{ row.permit_specialist.first_name }} {{ row.permit_specialist.last_name }} {% endif %}</td>
-                <td>
-                   <div class="symbol-group symbol-hover flex-nowrap">
-                     {% for i in row.get_people %}
-                     <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title="{{ i.get_fullname }}">
-                         <span class="symbol-label bg-{{ colors|random }} text-gray-300 fw-bold">{{ i.get_fullname|make_list|first }}</span>
-                     </div>
-                      {% endfor %}
-                     <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
-                         <span class="symbol-label bg-dark text-gray-300 fs-8 fw-bold">+42</span>
-                     </a>
-                 </div>
-                </td>
-                <td>
-                   <div class="symbol symbol-30px symbol-circle" data-bs-toggle="tooltip" title='Created by {{ row.get_created_by_fullname|capfirst }} on {{ row.date_created|date:"F j, Y" }} at {{ row.date_created|date:"f A" }}'>
-                      <img alt="Pic" src="{% static 'assets/media/avatars/blank.png' %}" /> &nbsp;<small>{{ row.date_created|date:"N j" }}</small>
-                   </div>
-                </td>
-             </tr>
-          {% endfor %}
-       </tbody>
-       <!--end::Table body-->
-    </table>
-       <!--end::Table-->
- </div>
-  <!--end::Card-->
+       $("#customers-table tbody input[name=td_paid_to_manager]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_paid_to_manager]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'paid_to_manager', input_value, 'input')
+           }
+       });
+
+       $("#customers-table tbody input[name=td_paid_to_closer]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_paid_to_closer]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'paid_to_closer', input_value, 'input')
+           }
+       });
+
+       $("#customers-table tbody input[name=td_paid_to_setter]").on("keyup change", function (ev) {
+           if (ev.keyCode == 13) {
+               const current_row = $(this).closest("tr");
+               const input_value = current_row.find("input[name=td_paid_to_setter]").val();
+               const customer_id = current_row.find("input[name=id_customer]").val();
+               saveUpdate(customer_id, 'paid_to_setter', input_value, 'input')
+           }
+       });
+
+
+       const addOption = (field_option_name) => {
+           $('input[name=field_option_name]').val(field_option_name)
+           $('#addOptionModal').modal('toggle');
+       }
+
+       // Format options
+       var optionFormat = function(item) {
+          if ( !item.id ) {
+              return item.text;
+          }
+          var span = document.createElement('span');
+          var imgUrl = item.element.getAttribute('data-kt-select2-img');
+          var template = '';
+
+          template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
+          template += item.text;
+
+          span.innerHTML = template;
+
+          return $(span);
+       }
+
+       $('select[name=manager]').select2({
+          templateSelection: optionFormat,
+          templateResult: optionFormat
+       });
+
+       $('select[name=setter]').select2({
+          templateSelection: optionFormat,
+          templateResult: optionFormat
+       });
+
+       $('select[name=closer]').select2({
+          templateSelection: optionFormat,
+          templateResult: optionFormat
+       });
+
+       $('select[name=people]').select2({
+          templateSelection: optionFormat,
+          templateResult: optionFormat
+       });
+   });
+</script>
+{% endblock %}
